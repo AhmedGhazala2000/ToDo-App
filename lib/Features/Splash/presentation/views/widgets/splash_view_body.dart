@@ -8,6 +8,14 @@ class SplashViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const StartView(),
+        ),
+      );
+    });
     return Center(
       child: SvgPicture.asset(
         'assets/images/SplashIcon.svg',
