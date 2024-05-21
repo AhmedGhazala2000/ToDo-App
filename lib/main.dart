@@ -14,6 +14,7 @@ class ToDoApp extends StatelessWidget {
     return  MaterialApp(
       theme: ThemeData(
         fontFamily: 'DM Sans',
+        scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashView(),
