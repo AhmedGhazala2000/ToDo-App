@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/Core/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
-import 'package:todo_app/Features/Auth/presentation/views/register_view.dart';
 
 import 'custom_text_form_field.dart';
+import 'get_experience_level.dart';
 import 'select_country.dart';
 
-class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+class RegisterViewBody extends StatefulWidget {
+  const RegisterViewBody({super.key});
 
   @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
+  State<RegisterViewBody> createState() => _LoginViewBodyState();
 }
 
-class _LoginViewBodyState extends State<LoginViewBody> {
+class _LoginViewBodyState extends State<RegisterViewBody> {
   bool isVisibility = true;
   String selectedCountry = '+20';
 
@@ -29,7 +29,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Login',
+                'Register',
                 style: AppStyles.styleBold24.copyWith(
                   color: const Color(0xff24252C),
                 ),
@@ -38,12 +38,42 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 height: 24,
               ),
               const CustomTextFormField(
+                hintText: 'Name...',
+                keyboardType: TextInputType.name,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextFormField(
                 hintText: '123 456-7890',
                 keyboardType: TextInputType.phone,
                 prefix: SelectCountry(),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
+              ),
+              const CustomTextFormField(
+                hintText: 'Years of experience...',
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextFormField(
+                hintText: 'Choose experience Level:',
+                keyboardType: TextInputType.none,
+                isExperienceLevel: true,
+                suffix: GetExperienceLevel(),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextFormField(
+                hintText: 'Address...',
+                keyboardType: TextInputType.streetAddress,
+              ),
+              const SizedBox(
+                height: 15,
               ),
               CustomTextFormField(
                 hintText: 'Password...',
@@ -67,7 +97,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
               CustomButton(
                 child: Text(
-                  'Sign In',
+                  'Sign up',
                   style: AppStyles.styleBold24.copyWith(
                     fontSize: 16,
                   ),
@@ -82,21 +112,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Didn’t have any account?',
+              'Already have any account?',
               style: TextStyle(color: kSecondColor),
             ),
             CustomInputButton(
               child: Text(
-                'Sign Up here',
+                'Sign in',
                 style: AppStyles.styleBold14.copyWith(color: kPrimaryColor),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterView(),
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
           ],

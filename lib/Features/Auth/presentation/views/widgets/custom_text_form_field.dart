@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Core/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -10,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffix,
     this.keyboardType,
     this.obscureText = false,
+    this.isExperienceLevel = false,
   });
 
   final Widget? prefix;
@@ -17,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final bool? obscureText;
+  final bool? isExperienceLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,10 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: kSecondColor),
+        hintStyle: TextStyle(
+          color: isExperienceLevel! ? const Color(0xff2F2F2F) : kSecondColor,
+          fontWeight: isExperienceLevel! ? FontWeight.w500 : FontWeight.normal,
+        ),
         suffixIcon: suffix,
         suffixIconColor: kThirdColor,
         prefixIcon: prefix,
