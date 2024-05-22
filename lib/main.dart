@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Features/Splash/presentation/views/splash_view.dart';
 
 void main() {
@@ -11,7 +10,7 @@ class ToDoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       theme: ThemeData(
         fontFamily: 'DM Sans',
         scaffoldBackgroundColor: Colors.white,

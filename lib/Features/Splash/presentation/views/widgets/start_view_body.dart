@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/Core/utils/styles.dart';
-import 'package:todo_app/Features/Splash/presentation/views/widgets/custom_button.dart';
+import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
 class StartViewBody extends StatelessWidget {
   const StartViewBody({super.key});
@@ -42,7 +43,12 @@ class StartViewBody extends StatelessWidget {
               ],
             ),
             onPressed: () {
-              print('Clicked');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginView(),
+                ),
+              );
             },
           ),
         ),
