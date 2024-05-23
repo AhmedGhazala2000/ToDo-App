@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.isExperienceLevel = false,
+    this.onSaved,
   });
 
   final Widget? prefix;
@@ -18,10 +19,18 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool? obscureText;
   final bool? isExperienceLevel;
+  final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (text) {
+        if (text!.isEmpty) {
+          return 'This field is required';
+        }
+        return null;
+      },
+      onSaved: onSaved,
       obscureText: obscureText!,
       keyboardType: keyboardType,
       decoration: InputDecoration(

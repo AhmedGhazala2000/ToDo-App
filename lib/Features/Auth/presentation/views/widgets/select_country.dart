@@ -36,7 +36,7 @@ class _SelectCountryState extends State<SelectCountry> {
                 context: context,
                 showPhoneCode: true,
                 countryListTheme: CountryListThemeData(
-                  bottomSheetHeight: MediaQuery.sizeOf(context).height * 0.5,
+                  bottomSheetHeight: MediaQuery.sizeOf(context).height * 0.6,
                 ),
                 onSelect: (Country country) {
                   setState(() {
