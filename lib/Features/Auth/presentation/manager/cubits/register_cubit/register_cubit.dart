@@ -7,15 +7,15 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this.registerRepo) : super(RegisterInitialState());
-final RegisterRepo registerRepo;
-Future registerUser(RegisterRequestModel model) async {
-  emit(RegisterLoadingState());
+  final RegisterRepo registerRepo;
 
-  final result = await registerRepo.register(model);
-  result.fold(
-    (failure) => emit(RegisterFailureState(failure.errMessage)),
-    (success) => emit(RegisterSuccessState()),
-  );
+  Future registerUser(RegisterRequestModel model) async {
+    emit(RegisterLoadingState());
 
+    final result = await registerRepo.register(model);
+    result.fold(
+      (failure) => emit(RegisterFailureState(failure.errMessage)),
+      (success) => emit(RegisterSuccessState()),
+    );
   }
 }

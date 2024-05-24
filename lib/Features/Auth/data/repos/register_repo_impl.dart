@@ -9,9 +9,9 @@ import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
 import 'package:todo_app/Features/Auth/data/repos/register_repo.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
-  final ApiService _apiService;
+  final ApiServices _apiService;
 
-  RegisterRepoImpl({required ApiService apiService}) : _apiService = apiService;
+  RegisterRepoImpl(ApiServices apiService) : _apiService = apiService;
 
   @override
   Future<Either<Failures, void>> register(RegisterRequestModel model) async {

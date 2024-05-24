@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
-class ApiService {
+class ApiServices {
   final Dio _dio;
   final String _baseUrl = 'https://todo.iraqsapp.com';
 
-  ApiService(this._dio);
+  ApiServices(this._dio);
 
   Future<Response> post({
     required String endPoint,
