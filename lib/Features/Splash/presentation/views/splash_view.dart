@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/Core/constant.dart';
+import 'package:todo_app/Core/utils/constant.dart';
 
 import 'widgets/splash_view_body.dart';
 
