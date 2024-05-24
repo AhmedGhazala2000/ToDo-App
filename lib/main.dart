@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Splash/presentation/views/splash_view.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObservers();
+
   runApp(const ToDoApp());
 }
 
