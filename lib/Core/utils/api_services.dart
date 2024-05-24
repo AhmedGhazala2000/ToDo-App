@@ -9,7 +9,7 @@ class ApiService {
   Future<Response> post({
     required String endPoint,
     required body,
-    required String token,
+    String? token,
     String? contentType,
   }) async {
     Response response = await _dio.post(
