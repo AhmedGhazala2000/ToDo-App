@@ -6,4 +6,5 @@ const Color kThirdColor = Color(0xffBABABA);
 
 abstract class EndPoints {
   static const String register = 'auth/register';
+  static const String login = 'auth/login';
 }

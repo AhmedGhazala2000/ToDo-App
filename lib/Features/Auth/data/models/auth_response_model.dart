@@ -1,9 +1,10 @@
 class AuthResponseModel {
-  final String id, displayName, accessToken, refreshToken;
+  final String id, accessToken, refreshToken;
+  final String? displayName;
 
   AuthResponseModel({
     required this.id,
-    required this.displayName,
+    this.displayName,
     required this.accessToken,
     required this.refreshToken,
   });
