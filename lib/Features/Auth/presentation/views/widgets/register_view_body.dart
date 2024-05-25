@@ -5,7 +5,7 @@ import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
-import 'package:todo_app/Features/Auth/presentation/manager/cubits/register_cubit/register_cubit.dart';
+import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 import 'get_experience_level.dart';
 import 'select_country.dart';
@@ -68,7 +68,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                   prefix: const SelectCountry(),
                   onSaved: (data) {
                     phone =
-                        '${context.read<RegisterCubit>().selectedCountry} $data';
+                        '${context.read<AuthCubit>().selectedCountry} $data';
                   },
                 ),
                 const SizedBox(
@@ -91,8 +91,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                   isExperienceLevel: true,
                   suffix: const GetExperienceLevel(),
                   onSaved: (_) {
-                    experienceLevel =
-                        context.read<RegisterCubit>().experienceLevel;
+                    experienceLevel = context.read<AuthCubit>().experienceLevel;
                   },
                 ),
                 const SizedBox(
@@ -131,13 +130,13 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 const SizedBox(
                   height: 24,
                 ),
-                BlocConsumer<RegisterCubit, RegisterState>(
+                BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is RegisterSuccessState) {
                       showSnackBar(context,
                           message: 'Successfully registered, Login now');
                       Navigator.pop(context);
-                      context.read<RegisterCubit>().experienceLevel = null;
+                      context.read<AuthCubit>().experienceLevel = null;
                     } else if (state is RegisterFailureState) {
                       showSnackBar(context, message: state.errMessage);
                     }
@@ -168,7 +167,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                             address: address!,
                             level: experienceLevel!,
                           );
-                          await BlocProvider.of<RegisterCubit>(context)
+                          await BlocProvider.of<AuthCubit>(context)
                               .registerUser(model);
                         } else {
                           showSnackBar(context,
@@ -198,7 +197,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  context.read<RegisterCubit>().experienceLevel = null;
+                  context.read<AuthCubit>().experienceLevel = null;
                 },
               ),
             ],

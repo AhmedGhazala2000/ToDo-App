@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-
-import '../../manager/cubits/register_cubit/register_cubit.dart';
+import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -31,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       validator: (text) {
         if (isExperienceLevel!) {
-          if (context.read<RegisterCubit>().experienceLevel == null) {
+          if (context.read<AuthCubit>().experienceLevel == null) {
             return 'Please select your level';
           }
           return null;

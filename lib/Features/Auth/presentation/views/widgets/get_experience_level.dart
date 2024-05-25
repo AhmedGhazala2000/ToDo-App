@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/Features/Auth/presentation/manager/cubits/register_cubit/register_cubit.dart';
+import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 
 class GetExperienceLevel extends StatefulWidget {
   const GetExperienceLevel({super.key});
@@ -10,7 +10,6 @@ class GetExperienceLevel extends StatefulWidget {
 }
 
 class _GetExperienceLevelState extends State<GetExperienceLevel> {
-
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
@@ -18,10 +17,10 @@ class _GetExperienceLevelState extends State<GetExperienceLevel> {
       borderRadius: BorderRadius.circular(8),
       alignment: Alignment.center,
       underline: const SizedBox(),
-      value: context.read<RegisterCubit>().experienceLevel,
+      value: context.read<AuthCubit>().experienceLevel,
       onChanged: (String? newValue) {
         setState(() {
-          context.read<RegisterCubit>().experienceLevel = newValue!;
+          context.read<AuthCubit>().experienceLevel = newValue!;
         });
       },
       items: <String>['fresh', 'junior', 'midLevel', 'senior']

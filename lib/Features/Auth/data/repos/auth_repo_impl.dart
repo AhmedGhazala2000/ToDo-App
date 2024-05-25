@@ -5,9 +5,9 @@ import 'package:todo_app/Core/errors/failures.dart';
 import 'package:todo_app/Core/utils/api_services.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
-import 'package:todo_app/Features/Auth/data/repos/register_repo.dart';
+import 'package:todo_app/Features/Auth/data/repos/auth_repo.dart';
 
-class RegisterRepoImpl implements RegisterRepo {
+class RegisterRepoImpl implements AuthRepo {
   final ApiServices _apiService;
 
   RegisterRepoImpl(ApiServices apiService) : _apiService = apiService;

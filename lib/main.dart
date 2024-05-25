@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
-import 'Features/Auth/data/repos/register_repo_impl.dart';
-import 'Features/Auth/presentation/manager/cubits/register_cubit/register_cubit.dart';
+import 'Features/Auth/data/repos/auth_repo_impl.dart';
+import 'Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'Features/Splash/presentation/views/splash_view.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class ToDoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(getIt.get<RegisterRepoImpl>()),
+      create: (context) => AuthCubit(getIt.get<RegisterRepoImpl>()),
       child: MaterialApp(
         theme: ThemeData(
           fontFamily: 'DM Sans',

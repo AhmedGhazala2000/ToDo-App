@@ -4,13 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
-
-import '../../manager/cubits/register_cubit/register_cubit.dart';
+import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 
 class SelectCountry extends StatefulWidget {
-  const SelectCountry({
-    super.key
-  });
+  const SelectCountry({super.key});
 
   @override
   State<SelectCountry> createState() => _SelectCountryState();
@@ -25,7 +22,7 @@ class _SelectCountryState extends State<SelectCountry> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            context.read<RegisterCubit>().selectedCountry!,
+            context.read<AuthCubit>().selectedCountry!,
             style: AppStyles.styleBold14.copyWith(color: kSecondColor),
           ),
           IconButton(
@@ -43,7 +40,7 @@ class _SelectCountryState extends State<SelectCountry> {
                 ),
                 onSelect: (Country country) {
                   setState(() {
-                    context.read<RegisterCubit>().selectedCountry =
+                    context.read<AuthCubit>().selectedCountry =
                         '+${country.phoneCode}';
                   });
                 },
