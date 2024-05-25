@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
@@ -16,15 +17,17 @@ class RegisterRepoImpl implements RegisterRepo {
   @override
   Future<Either<Failures, void>> register(RegisterRequestModel model) async {
     try {
-      Response response = await _apiService.post(
+      var response = await _apiService.post(
         endPoint: EndPoints.register,
-        body: model.toJson(),
+        bodyData: model.toJson(),
       );
       log(response.data.toString());
       return right(null);
     } on DioException catch (e) {
+      log(e.response?.data["message"].toString() ?? e.toString());
       return left(ServerFailure.fromDioException(dioException: e));
     } catch (e) {
+      log(e.toString());
       return left(ServerFailure(errMessage: e.toString()));
     }
   }

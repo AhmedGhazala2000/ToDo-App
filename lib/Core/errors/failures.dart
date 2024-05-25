@@ -52,7 +52,7 @@ class ServerFailure extends Failures {
   }
 
   factory ServerFailure.fromResponse({int? statusCode, dynamic response}) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403|| statusCode == 422) {
       return ServerFailure(
         errMessage: response['message'],
       );

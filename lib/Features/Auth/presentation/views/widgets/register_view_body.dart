@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
-
 import 'custom_text_form_field.dart';
 import 'get_experience_level.dart';
 import 'select_country.dart';
@@ -115,7 +113,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                       fontSize: 16,
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                     } else {

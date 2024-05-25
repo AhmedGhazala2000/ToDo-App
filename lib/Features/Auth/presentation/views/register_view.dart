@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/Core/utils/api_services.dart';
 import 'package:todo_app/Core/utils/service_locator.dart';
 import 'package:todo_app/Features/Auth/data/repos/register_repo_impl.dart';
 

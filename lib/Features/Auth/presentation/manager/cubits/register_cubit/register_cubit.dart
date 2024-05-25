@@ -6,13 +6,13 @@ import 'package:todo_app/Features/Auth/data/repos/register_repo.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this.registerRepo) : super(RegisterInitialState());
-  final RegisterRepo registerRepo;
+  RegisterCubit(this._registerRepo) : super(RegisterInitialState());
+  final RegisterRepo _registerRepo;
 
   Future registerUser(RegisterRequestModel model) async {
     emit(RegisterLoadingState());
 
-    final result = await registerRepo.register(model);
+    final result = await _registerRepo.register(model);
     result.fold(
       (failure) => emit(RegisterFailureState(failure.errMessage)),
       (success) => emit(RegisterSuccessState()),

@@ -23,7 +23,7 @@ class _GetExperienceLevelState extends State<GetExperienceLevel> {
           experienceLevel = newValue!;
         });
       },
-      items: <String>['Fresh', 'Junior', 'Mid-Level', 'Senior']
+      items: <String>['fresh', 'junior', 'midLevel', 'senior']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

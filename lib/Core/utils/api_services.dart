@@ -8,17 +8,19 @@ class ApiServices {
 
   Future<Response> post({
     required String endPoint,
-    required body,
+    required bodyData,
     String? token,
     String? contentType,
   }) async {
     Response response = await _dio.post(
       '$_baseUrl/$endPoint',
-      data: body,
       options: Options(
-        contentType: contentType,
-        headers: {'Authorization': "Bearer $token"},
+        headers: {
+          'Content-Type': contentType ?? 'application/json',
+          'Authorization': 'Bearer $token',
+        },
       ),
+      data: bodyData,
     );
     return response;
   }
