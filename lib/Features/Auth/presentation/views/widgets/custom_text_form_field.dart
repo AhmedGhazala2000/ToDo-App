@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/constant.dart';
+
+import '../../manager/cubits/register_cubit/register_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -11,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.isExperienceLevel = false,
     this.onSaved,
+    this.readOnly = false,
   });
 
   final Widget? prefix;
@@ -19,17 +23,24 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool? obscureText;
   final bool? isExperienceLevel;
+  final bool? readOnly;
   final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (text) {
-        if (text!.isEmpty) {
+        if (isExperienceLevel!) {
+          if (context.read<RegisterCubit>().experienceLevel == null) {
+            return 'Please select your level';
+          }
+          return null;
+        } else if (text!.isEmpty) {
           return 'This field is required';
         }
         return null;
       },
+      readOnly: readOnly!,
       onSaved: onSaved,
       obscureText: obscureText!,
       keyboardType: keyboardType,

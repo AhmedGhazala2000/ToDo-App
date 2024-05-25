@@ -8,6 +8,9 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this._registerRepo) : super(RegisterInitialState());
   final RegisterRepo _registerRepo;
+  String? selectedCountry = '+20';
+  String? experienceLevel;
+
 
   Future registerUser(RegisterRequestModel model) async {
     emit(RegisterLoadingState());

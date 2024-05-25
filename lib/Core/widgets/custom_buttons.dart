@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onPressed, required this.child});
+  const CustomButton({super.key, required this.onPressed, required this.child, this.isLoading = false});
 
   final void Function()? onPressed;
   final Widget? child;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {

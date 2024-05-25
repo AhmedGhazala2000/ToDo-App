@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
+import 'package:todo_app/Features/Auth/presentation/manager/cubits/register_cubit/register_cubit.dart';
 import 'custom_text_form_field.dart';
 import 'get_experience_level.dart';
 import 'select_country.dart';
@@ -16,9 +19,10 @@ class RegisterViewBody extends StatefulWidget {
 
 class _LoginViewBodyState extends State<RegisterViewBody> {
   bool isVisibility = true;
-  String selectedCountry = '+20';
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode? autoValidateMode = AutovalidateMode.disabled;
+  String? name, phone, password, address, experienceLevel;
+  num? experienceYears;
 
   @override
   Widget build(BuildContext context) {
@@ -48,40 +52,58 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 const SizedBox(
                   height: 24,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
                   hintText: 'Name...',
                   keyboardType: TextInputType.name,
+                  onSaved: (data) {
+                    name = data;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
                   hintText: '123 456-7890',
                   keyboardType: TextInputType.phone,
-                  prefix: SelectCountry(),
+                  prefix: const SelectCountry(),
+                  onSaved: (data) {
+                    phone =
+                        '${context.read<RegisterCubit>().selectedCountry} $data';
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
                   hintText: 'Years of experience...',
                   keyboardType: TextInputType.number,
+                  onSaved: (data) {
+                    experienceYears = num.parse(data!);
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  readOnly: true,
                   hintText: 'Choose experience Level:',
                   keyboardType: TextInputType.none,
                   isExperienceLevel: true,
-                  suffix: GetExperienceLevel(),
+                  suffix: const GetExperienceLevel(),
+                  onSaved: (_) {
+                    experienceLevel =
+                        context.read<RegisterCubit>().experienceLevel;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
                   hintText: 'Address...',
                   keyboardType: TextInputType.streetAddress,
+                  onSaved: (data) {
+                    address = data;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -102,26 +124,60 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                       });
                     },
                   ),
+                  onSaved: (data) {
+                    password = data;
+                  },
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                CustomButton(
-                  child: Text(
-                    'Sign up',
-                    style: AppStyles.styleBold24.copyWith(
-                      fontSize: 16,
-                    ),
-                  ),
-                  onPressed: () async {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                    } else {
+                BlocConsumer<RegisterCubit, RegisterState>(
+                  listener: (context, state) {
+                    if (state is RegisterSuccessState) {
                       showSnackBar(context,
-                          message: 'Please enter the required fields');
-                      autoValidateMode = AutovalidateMode.always;
-                      setState(() {});
+                          message: 'Successfully registered, Login now');
+                      Navigator.pop(context);
+                      context.read<RegisterCubit>().experienceLevel = null;
+                    } else if (state is RegisterFailureState) {
+                      showSnackBar(context, message: state.errMessage);
                     }
+                  },
+                  builder: (context, state) {
+                    return CustomButton(
+                      child: state is RegisterLoadingState
+                          ? const SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                  color: Colors.white),
+                            )
+                          : Text(
+                              'Sign up',
+                              style: AppStyles.styleBold24.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          var model = RegisterRequestModel(
+                            phone: phone!,
+                            password: password!,
+                            displayName: name!,
+                            experienceYears: experienceYears!,
+                            address: address!,
+                            level: experienceLevel!,
+                          );
+                          await BlocProvider.of<RegisterCubit>(context)
+                              .registerUser(model);
+                        } else {
+                          showSnackBar(context,
+                              message: 'Please enter the required fields');
+                          autoValidateMode = AutovalidateMode.always;
+                          setState(() {});
+                        }
+                      },
+                    );
                   },
                 ),
               ],
@@ -142,6 +198,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
+                  context.read<RegisterCubit>().experienceLevel = null;
                 },
               ),
             ],

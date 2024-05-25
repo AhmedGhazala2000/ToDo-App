@@ -2,7 +2,7 @@ class RegisterRequestModel {
   final String phone;
   final String password;
   final String displayName;
-  final int experienceYears;
+  final num experienceYears;
   final String address;
   final String level;
 
