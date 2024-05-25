@@ -15,14 +15,16 @@ class RegisterRepoImpl implements AuthRepo {
   RegisterRepoImpl(ApiServices apiService) : _apiService = apiService;
 
   @override
-  Future<Either<Failures, void>> register(RegisterRequestModel model) async {
+  Future<Either<Failures, AuthResponseModel>> register(
+      RegisterRequestModel model) async {
     try {
       var response = await _apiService.post(
         endPoint: EndPoints.register,
         bodyData: model.toJson(),
       );
-      log(response.data.toString());
-      return right(null);
+      AuthResponseModel data = AuthResponseModel.fromJson(response.data);
+      log(data.toString());
+      return right(data);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
       return left(ServerFailure.fromDioException(dioException: e));
