@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Features/Auth/data/models/login_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/register_view.dart';
 
+import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 import 'select_country.dart';
 
@@ -20,6 +23,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   String selectedCountry = '+20';
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode? autoValidateMode = AutovalidateMode.disabled;
+  String? phone, password;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +47,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 const SizedBox(
                   height: 24,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
                   hintText: '123 456-7890',
                   keyboardType: TextInputType.phone,
-                  prefix: SelectCountry(),
+                  prefix: const SelectCountry(),
+                  onSaved: (data) {
+                    phone =
+                        '${context.read<AuthCubit>().selectedCountry} $data';
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -67,27 +75,54 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       });
                     },
                   ),
+                  onSaved: (data) {
+                    password = data;
+                  },
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                CustomButton(
-                  child: Text(
-                    'Sign In',
-                    style: AppStyles.styleBold24.copyWith(
-                      fontSize: 16,
-                    ),
-                  ),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-
-                    } else {
-                      showSnackBar(context,
-                          message: 'Please enter the required fields');
-                      autoValidateMode = AutovalidateMode.always;
-                      setState(() {});
+                BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is LoginSuccessState) {
+                      showSnackBar(context, message: 'Login Success, Welcome');
                     }
+                    else if (state is LoginFailureState) {
+                      showSnackBar(context, message: state.errMessage);
+                    }
+                  },
+                  builder: (context, state) {
+                    return CustomButton(
+                      child: state is LoginLoadingState
+                          ? const SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                  color: Colors.white),
+                            )
+                          : Text(
+                              'Sign In',
+                              style: AppStyles.styleBold24.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          var model = LoginRequestModel(
+                            phone: phone!,
+                            password: password!,
+                          );
+                          await BlocProvider.of<AuthCubit>(context)
+                              .loginUser(model);
+                        } else {
+                          showSnackBar(context,
+                              message: 'Please enter the required fields');
+                          autoValidateMode = AutovalidateMode.always;
+                          setState(() {});
+                        }
+                      },
+                    );
                   },
                 ),
               ],

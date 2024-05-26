@@ -23,7 +23,6 @@ class RegisterRepoImpl implements AuthRepo {
         bodyData: model.toJson(),
       );
       AuthResponseModel data = AuthResponseModel.fromJson(response.data);
-      log(data.toString());
       return right(data);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
@@ -43,7 +42,6 @@ class RegisterRepoImpl implements AuthRepo {
         bodyData: model.toJson(),
       );
       AuthResponseModel data = AuthResponseModel.fromJson(response.data);
-      log(data.toString());
       return right(data);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
