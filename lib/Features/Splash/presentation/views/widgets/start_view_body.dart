@@ -43,12 +43,7 @@ class StartViewBody extends StatelessWidget {
               ],
             ),
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginView(),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, LoginView.id);
             },
           ),
         ),

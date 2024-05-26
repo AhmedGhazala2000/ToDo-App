@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
-import 'Features/Auth/data/repos/auth_repo_impl.dart';
-import 'Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
+import 'Features/Auth/presentation/views/login_view.dart';
+import 'Features/Auth/presentation/views/register_view.dart';
 import 'Features/Splash/presentation/views/splash_view.dart';
+import 'Features/Splash/presentation/views/start_view.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObservers();
@@ -17,16 +18,19 @@ class ToDoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(getIt.get<RegisterRepoImpl>()),
-      child: MaterialApp(
-        theme: ThemeData(
-          fontFamily: 'DM Sans',
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const SplashView(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'DM Sans',
+        scaffoldBackgroundColor: Colors.white,
       ),
+      routes: {
+        SplashView.id: (context) => const SplashView(),
+        StartView.id: (context) => const StartView(),
+        LoginView.id: (context) => const LoginView(),
+        RegisterView.id: (context) => const RegisterView(),
+      },
+      initialRoute: SplashView.id,
     );
   }
 }

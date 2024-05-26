@@ -6,6 +6,7 @@ import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/data/models/login_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/register_view.dart';
+import 'package:todo_app/Features/Auth/presentation/views/widgets/login_button_bloc_consumer.dart';
 
 import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
@@ -21,14 +22,14 @@ class LoginViewBody extends StatefulWidget {
 class _LoginViewBodyState extends State<LoginViewBody> {
   bool isVisibility = true;
   String selectedCountry = '+20';
-  GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
   AutovalidateMode? autoValidateMode = AutovalidateMode.disabled;
   String? phone, password;
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: _formKey,
       autovalidateMode: autoValidateMode,
       child: Column(
         children: [
@@ -82,47 +83,23 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 const SizedBox(
                   height: 24,
                 ),
-                BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    if (state is LoginSuccessState) {
-                      showSnackBar(context, message: 'Login Success, Welcome');
+                LoginButtonBlocConsumer(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      var model = LoginRequestModel(
+                        phone: phone!,
+                        password: password!,
+                      );
+                      await BlocProvider.of<AuthCubit>(context)
+                          .loginUser(model);
+                    } else {
+                      showSnackBar(context,
+                          message: 'Please enter the required fields',
+                          color: Colors.red);
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {});
                     }
-                    else if (state is LoginFailureState) {
-                      showSnackBar(context, message: state.errMessage);
-                    }
-                  },
-                  builder: (context, state) {
-                    return CustomButton(
-                      child: state is LoginLoadingState
-                          ? const SizedBox(
-                              height: 24,
-                              width: 24,
-                              child: CircularProgressIndicator(
-                                  color: Colors.white),
-                            )
-                          : Text(
-                              'Sign In',
-                              style: AppStyles.styleBold24.copyWith(
-                                fontSize: 16,
-                              ),
-                            ),
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          var model = LoginRequestModel(
-                            phone: phone!,
-                            password: password!,
-                          );
-                          await BlocProvider.of<AuthCubit>(context)
-                              .loginUser(model);
-                        } else {
-                          showSnackBar(context,
-                              message: 'Please enter the required fields');
-                          autoValidateMode = AutovalidateMode.always;
-                          setState(() {});
-                        }
-                      },
-                    );
                   },
                 ),
               ],
@@ -142,12 +119,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   style: AppStyles.styleBold14.copyWith(color: kPrimaryColor),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterView(),
-                    ),
-                  );
+                  Navigator.pushReplacementNamed(context, RegisterView.id);
                 },
               ),
             ],

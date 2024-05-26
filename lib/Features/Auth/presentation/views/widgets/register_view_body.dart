@@ -5,6 +5,7 @@ import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
+import 'package:todo_app/Features/Auth/presentation/views/widgets/register_button_bloc_consumer.dart';
 import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 import 'get_experience_level.dart';
@@ -130,53 +131,27 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 const SizedBox(
                   height: 24,
                 ),
-                BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    if (state is RegisterSuccessState) {
+                RegisterButtonBlocConsumer(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      var model = RegisterRequestModel(
+                        phone: phone!,
+                        password: password!,
+                        displayName: name!,
+                        experienceYears: experienceYears!,
+                        address: address!,
+                        level: experienceLevel!,
+                      );
+                      await BlocProvider.of<AuthCubit>(context)
+                          .registerUser(model);
+                    } else {
                       showSnackBar(context,
-                          message: 'Successfully registered, Login now');
-                      Navigator.pop(context);
-                      context.read<AuthCubit>().experienceLevel = null;
-                    } else if (state is RegisterFailureState) {
-                      showSnackBar(context, message: state.errMessage);
+                          message: 'Please enter the required fields',
+                          color: Colors.red);
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {});
                     }
-                  },
-                  builder: (context, state) {
-                    return CustomButton(
-                      child: state is RegisterLoadingState
-                          ? const SizedBox(
-                              height: 24,
-                              width: 24,
-                              child: CircularProgressIndicator(
-                                  color: Colors.white),
-                            )
-                          : Text(
-                              'Sign up',
-                              style: AppStyles.styleBold24.copyWith(
-                                fontSize: 16,
-                              ),
-                            ),
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          var model = RegisterRequestModel(
-                            phone: phone!,
-                            password: password!,
-                            displayName: name!,
-                            experienceYears: experienceYears!,
-                            address: address!,
-                            level: experienceLevel!,
-                          );
-                          await BlocProvider.of<AuthCubit>(context)
-                              .registerUser(model);
-                        } else {
-                          showSnackBar(context,
-                              message: 'Please enter the required fields');
-                          autoValidateMode = AutovalidateMode.always;
-                          setState(() {});
-                        }
-                      },
-                    );
                   },
                 ),
               ],
