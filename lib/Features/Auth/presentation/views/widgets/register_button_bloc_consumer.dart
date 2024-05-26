@@ -22,7 +22,7 @@ class RegisterButtonBlocConsumer extends StatelessWidget {
           Navigator.pop(context);
           context.read<AuthCubit>().experienceLevel = null;
         } else if (state is RegisterFailureState) {
-          showSnackBar(context, message: state.errMessage);
+          showSnackBar(context, message: state.errMessage,color: Colors.red);
         }
       },
       builder: (context, state) {

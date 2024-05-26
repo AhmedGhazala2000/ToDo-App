@@ -119,7 +119,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   style: AppStyles.styleBold14.copyWith(color: kPrimaryColor),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, RegisterView.id);
+                  Navigator.pushNamed(context, RegisterView.id);
                 },
               ),
             ],
