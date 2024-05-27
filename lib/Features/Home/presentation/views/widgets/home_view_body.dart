@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/styles.dart';
 import 'custom_home_app_bar.dart';
+import 'select_tasks_items_list_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -9,11 +12,19 @@ class HomeViewBody extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 22),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomHomeAppBar(),
-
+          SizedBox(height: 24),
+          Opacity(
+            opacity: 0.6,
+            child: Text('My Tasks', style: AppStyles.styleBold16),
+          ),
+          SizedBox(height: 16),
+          SelectTasksItemsListView(),
         ],
       ),
     );
   }
 }
+
