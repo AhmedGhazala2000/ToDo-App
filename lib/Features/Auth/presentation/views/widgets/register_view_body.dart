@@ -44,11 +44,9 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Register',
-                  style: AppStyles.styleBold24.copyWith(
-                    color: const Color(0xff24252C),
-                  ),
+                  style: AppStyles.styleBold24
                 ),
                 const SizedBox(
                   height: 24,
@@ -163,7 +161,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
             children: [
               const Text(
                 'Already have any account?',
-                style: TextStyle(color: kSecondColor),
+                style: TextStyle(color: kThirdColor),
               ),
               CustomInputButton(
                 child: Text(

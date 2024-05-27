@@ -32,7 +32,7 @@ class ToDoApp extends StatelessWidget {
         RegisterView.id: (context) => const RegisterView(),
         HomeView.id: (context) => const HomeView(),
       },
-      initialRoute: SplashView.id,
+      initialRoute: HomeView.id,
     );
   }
 }

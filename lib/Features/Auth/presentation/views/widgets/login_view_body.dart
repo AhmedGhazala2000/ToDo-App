@@ -39,11 +39,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Login',
-                  style: AppStyles.styleBold24.copyWith(
-                    color: const Color(0xff24252C),
-                  ),
+                  style: AppStyles.styleBold24
                 ),
                 const SizedBox(
                   height: 24,
@@ -111,7 +109,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             children: [
               const Text(
                 'Didn’t have any account?',
-                style: TextStyle(color: kSecondColor),
+                style: TextStyle(color: kThirdColor),
               ),
               CustomInputButton(
                 child: Text(

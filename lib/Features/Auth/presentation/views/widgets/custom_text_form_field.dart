@@ -46,13 +46,13 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
-          color: isExperienceLevel! ? const Color(0xff2F2F2F) : kSecondColor,
+          color: isExperienceLevel! ? const Color(0xff2F2F2F) : kThirdColor,
           fontWeight: isExperienceLevel! ? FontWeight.w500 : FontWeight.normal,
         ),
         suffixIcon: suffix,
-        suffixIconColor: kThirdColor,
+        suffixIconColor: kFourthColor,
         prefixIcon: prefix,
-        prefixIconColor: kSecondColor,
+        prefixIconColor: kThirdColor,
         border: customOutlineInputBorder(),
       ),
     );
@@ -62,7 +62,7 @@ class CustomTextFormField extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(
-        color: kThirdColor,
+        color: kFourthColor,
       ),
     );
   }
