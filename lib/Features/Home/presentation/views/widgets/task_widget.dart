@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
+import 'custom_icon_button.dart';
 import 'task_image.dart';
 import 'task_priority.dart';
 import 'task_status.dart';
@@ -67,13 +68,7 @@ class TaskWidget extends StatelessWidget {
           const SizedBox(width: 8),
           Transform.translate(
             offset: const Offset(0, -22),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert,
-                color: Colors.black,
-              ),
-            ),
+            child: const CustomIconButton()
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Auth/presentation/views/login_view.dart';
 import 'Features/Auth/presentation/views/register_view.dart';
 import 'Features/Home/presentation/views/home_view.dart';
+import 'Features/Home/presentation/views/task_details_view.dart';
 import 'Features/Splash/presentation/views/splash_view.dart';
 import 'Features/Splash/presentation/views/start_view.dart';
 
@@ -31,6 +32,7 @@ class ToDoApp extends StatelessWidget {
         LoginView.id: (context) => const LoginView(),
         RegisterView.id: (context) => const RegisterView(),
         HomeView.id: (context) => const HomeView(),
+        TaskDetailsView.id: (context) => const TaskDetailsView(),
       },
       initialRoute: HomeView.id,
     );
