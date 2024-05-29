@@ -23,13 +23,13 @@ class _SelectCountryState extends State<SelectCountry> {
         children: [
           Text(
             context.read<AuthCubit>().selectedCountry!,
-            style: AppStyles.styleBold14.copyWith(color: kThirdColor),
+            style: AppStyles.styleBold14.copyWith(color: kFourthColor),
           ),
           IconButton(
             padding: EdgeInsets.zero,
             icon: const Icon(
               FontAwesomeIcons.angleDown,
-              color: kThirdColor,
+              color: kFourthColor,
             ),
             onPressed: () {
               showCountryPicker(

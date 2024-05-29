@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'Core/utils/constant.dart';
 import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
-import 'Features/Auth/presentation/views/login_view.dart';
-import 'Features/Auth/presentation/views/register_view.dart';
 import 'Features/Home/presentation/views/home_view.dart';
-import 'Features/Home/presentation/views/task_details_view.dart';
-import 'Features/Splash/presentation/views/splash_view.dart';
-import 'Features/Splash/presentation/views/start_view.dart';
+
 
 void main() {
   Bloc.observer = SimpleBlocObservers();
@@ -26,15 +23,9 @@ class ToDoApp extends StatelessWidget {
         fontFamily: 'DM Sans',
         scaffoldBackgroundColor: Colors.white,
       ),
-      routes: {
-        SplashView.id: (context) => const SplashView(),
-        StartView.id: (context) => const StartView(),
-        LoginView.id: (context) => const LoginView(),
-        RegisterView.id: (context) => const RegisterView(),
-        HomeView.id: (context) => const HomeView(),
-        TaskDetailsView.id: (context) => const TaskDetailsView(),
-      },
+      routes: appRoutes(),
       initialRoute: HomeView.id,
     );
   }
+
 }

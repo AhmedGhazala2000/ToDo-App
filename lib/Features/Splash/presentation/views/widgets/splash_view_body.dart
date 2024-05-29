@@ -35,7 +35,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       opacity: _animation!,
       child: Center(
         child: SvgPicture.asset(
-          'assets/images/SplashIcon.svg',
+          'assets/images/splash_icon.svg',
           width: 124,
         ),
       ),

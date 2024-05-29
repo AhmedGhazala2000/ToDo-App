@@ -11,7 +11,7 @@ class StartViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: Image.asset('assets/images/ArtImage.png')),
+        Expanded(child: Image.asset('assets/images/art_image.png')),
         const SizedBox(height: 24),
         Text(
           'Task Management &\nTo-Do List',

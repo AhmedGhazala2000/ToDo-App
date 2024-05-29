@@ -33,7 +33,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       autovalidateMode: autoValidateMode,
       child: Column(
         children: [
-          Expanded(child: Image.asset('assets/images/ArtImage.png')),
+          Expanded(child: Image.asset('assets/images/art_image.png')),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -109,7 +109,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             children: [
               const Text(
                 'Didn’t have any account?',
-                style: TextStyle(color: kThirdColor),
+                style: TextStyle(color: kFourthColor),
               ),
               CustomInputButton(
                 child: Text(

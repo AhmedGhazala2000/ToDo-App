@@ -36,7 +36,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
           SizedBox(
               height: height * .25,
               child: Image.asset(
-                'assets/images/ArtImage.png',
+                'assets/images/art_image.png',
                 fit: BoxFit.scaleDown,
               )),
           Padding(
@@ -161,7 +161,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
             children: [
               const Text(
                 'Already have any account?',
-                style: TextStyle(color: kThirdColor),
+                style: TextStyle(color: kFourthColor),
               ),
               CustomInputButton(
                 child: Text(

@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TaskImage extends StatelessWidget {
-  const TaskImage({super.key});
+  const TaskImage({super.key, this.aspectRatio});
 
+  final double? aspectRatio;
   final String imageUrl =
       'https://th.bing.com/th/id/OIP.IcOIf38lUmebdO7EEKkRmgHaKQ?rs=1&pid=ImgDetMain';
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: aspectRatio ?? 1,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.fill,
@@ -29,7 +30,7 @@ class TaskImage extends StatelessWidget {
 
   Widget buildShimmerPlaceholder() {
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: aspectRatio ?? 1,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.fill,

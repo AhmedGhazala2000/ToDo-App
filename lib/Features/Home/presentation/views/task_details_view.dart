@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/build_custom_app_bar.dart';
-import 'widgets/custom_icon_button.dart';
+import 'widgets/custom_popup_menu_button.dart';
+import 'widgets/task_details_view_body.dart';
 
 class TaskDetailsView extends StatelessWidget {
   const TaskDetailsView({super.key});
@@ -15,10 +16,11 @@ class TaskDetailsView extends StatelessWidget {
           context,
           title: 'Task Details',
           actions: const Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: CustomIconButton(),
+            padding: EdgeInsets.only(right: 16),
+            child: CustomPopupMenuButton(),
           ),
         ),
+        body: const TaskDetailsViewBody(),
       ),
     );
   }

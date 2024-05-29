@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
               FloatingActionButton.small(
                 shape: const CircleBorder(),
                 onPressed: () {},
-                child: SvgPicture.asset('assets/images/BarcodeImg.svg'),
+                child: SvgPicture.asset('assets/images/barcode_icon.svg'),
               ),
               const SizedBox(height: 14),
               FloatingActionButton(
