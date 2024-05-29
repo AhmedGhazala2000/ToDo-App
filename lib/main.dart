@@ -5,7 +5,6 @@ import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Home/presentation/views/home_view.dart';
 
-
 void main() {
   Bloc.observer = SimpleBlocObservers();
   setupServiceLocator();
@@ -27,5 +26,4 @@ class ToDoApp extends StatelessWidget {
       initialRoute: HomeView.id,
     );
   }
-
 }

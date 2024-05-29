@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
 class TaskPriority extends StatelessWidget {
@@ -10,7 +11,14 @@ class TaskPriority extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.flag_outlined, color: getColor(priority), size: 16),
+        SvgPicture.asset(
+          'assets/images/flag.svg',
+          colorFilter: ColorFilter.mode(
+            getColor(priority),
+            BlendMode.modulate,
+          ),
+          width: 16,
+        ),
         const SizedBox(width: 4),
         Text(
           priority,

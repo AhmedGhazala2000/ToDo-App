@@ -26,6 +26,7 @@ class HomeView extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               FloatingActionButton(
+                heroTag: 'add',
                 backgroundColor: kPrimaryColor,
                 shape: const CircleBorder(),
                 onPressed: () {},
