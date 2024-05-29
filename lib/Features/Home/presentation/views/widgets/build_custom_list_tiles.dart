@@ -14,13 +14,14 @@ class BuildCustomListTiles extends StatefulWidget {
 
 class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
   DateTime? _selectedDate = DateTime.now();
+  String status = 'Inprogress';
+  String priority = 'Medium';
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomListTile(
-          onTap: _showDatePiker,
           title: const Text(
             'End Date',
             style: TextStyle(
@@ -32,33 +33,64 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
             DateFormat('d MMMM, yyyy').format(_selectedDate!),
             style: const TextStyle(color: kSecondColor),
           ),
-          trailing: SvgPicture.asset('assets/images/calendar.svg'),
+          trailing: InkWell(
+            onTap: _showDatePiker,
+            child: SvgPicture.asset('assets/images/calendar.svg'),
+          ),
         ),
         const SizedBox(height: 8),
         CustomListTile(
-          onTap: () {
-
-          },
           title: Text(
-            'Inprogress',
+            status,
             style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
           ),
-          trailing: SvgPicture.asset('assets/images/arrow-down.svg'),
+          trailing: DropdownButton(
+            borderRadius: BorderRadius.circular(12),
+            underline: const SizedBox(),
+            onChanged: (value) {
+              setState(() {
+                status = value!;
+              });
+            },
+            items: <String>['Waiting', 'Inprogress', 'Finished']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            icon: SvgPicture.asset('assets/images/arrow-down.svg'),
+          ),
         ),
         const SizedBox(height: 8),
         CustomListTile(
-          onTap: () {},
           title: Row(
             children: [
               SvgPicture.asset('assets/images/flag.svg'),
               const SizedBox(width: 10),
               Text(
-                'Medium Priority',
+                '$priority Priority',
                 style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
               ),
             ],
           ),
-          trailing: SvgPicture.asset('assets/images/arrow-down.svg'),
+          trailing: DropdownButton(
+            borderRadius: BorderRadius.circular(12),
+            underline: const SizedBox(),
+            onChanged: (value) {
+              setState(() {
+                priority = value!;
+              });
+            },
+            items: <String>['Low', 'Medium', 'High']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            icon: SvgPicture.asset('assets/images/arrow-down.svg'),
+          ),
         ),
       ],
     );

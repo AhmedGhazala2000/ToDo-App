@@ -7,13 +7,11 @@ class CustomListTile extends StatelessWidget {
     this.title,
     this.subtitle,
     this.trailing,
-    this.onTap,
   });
 
   final Widget? title;
   final Widget? subtitle;
   final Widget? trailing;
-  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,6 @@ class CustomListTile extends StatelessWidget {
       ),
       child: Center(
         child: ListTile(
-          onTap: onTap,
           minVerticalPadding: 0,
           minTileHeight: 0,
           contentPadding: EdgeInsets.zero,
