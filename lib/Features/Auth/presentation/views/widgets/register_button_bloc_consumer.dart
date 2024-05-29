@@ -22,7 +22,7 @@ class RegisterButtonBlocConsumer extends StatelessWidget {
           Navigator.pop(context);
           context.read<AuthCubit>().experienceLevel = null;
         } else if (state is RegisterFailureState) {
-          showSnackBar(context, message: state.errMessage,color: Colors.red);
+          showSnackBar(context, message: state.errMessage, color: Colors.red);
         }
       },
       builder: (context, state) {
@@ -34,9 +34,9 @@ class RegisterButtonBlocConsumer extends StatelessWidget {
                   width: 24,
                   child: CircularProgressIndicator(color: Colors.white),
                 )
-              : const Text(
+              : Text(
                   'Sign up',
-                  style: AppStyles.styleBold16
+                  style: AppStyles.styleBold16.copyWith(color: Colors.white),
                 ),
         );
       },

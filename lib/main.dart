@@ -19,8 +19,14 @@ class ToDoApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'DM Sans',
+        useMaterial3: false,
         scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'DM Sans',
+        datePickerTheme: DatePickerThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
       ),
       routes: appRoutes(),
       initialRoute: HomeView.id,

@@ -31,7 +31,10 @@ class TaskDetailsViewBody extends StatelessWidget {
                   'this application they can enlist all their products in one'
                   'place and can deliver. Customers will get a one-stop'
                   'solution for their daily shopping.',
-                  style: TextStyle(color: kSecondColor.withOpacity(.6)),
+                  style: TextStyle(
+                    height: 1.4,
+                    color: kSecondColor.withOpacity(.6),
+                  ),
                 )
               ],
             ),

@@ -20,6 +20,7 @@ class HomeView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               FloatingActionButton.small(
+                backgroundColor: kThirdColor,
                 shape: const CircleBorder(),
                 onPressed: () {},
                 child: SvgPicture.asset('assets/images/barcode_icon.svg'),
