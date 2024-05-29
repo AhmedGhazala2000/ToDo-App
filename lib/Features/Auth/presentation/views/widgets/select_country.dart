@@ -30,6 +30,7 @@ class _SelectCountryState extends State<SelectCountry> {
             icon: const Icon(
               FontAwesomeIcons.angleDown,
               color: kFourthColor,
+              size: 22,
             ),
             onPressed: () {
               showCountryPicker(

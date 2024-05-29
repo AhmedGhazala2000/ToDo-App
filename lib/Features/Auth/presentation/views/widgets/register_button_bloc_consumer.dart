@@ -20,7 +20,6 @@ class RegisterButtonBlocConsumer extends StatelessWidget {
               message: 'Successfully registered, Login now',
               color: Colors.green);
           Navigator.pop(context);
-          context.read<AuthCubit>().experienceLevel = null;
         } else if (state is RegisterFailureState) {
           showSnackBar(context, message: state.errMessage, color: Colors.red);
         }

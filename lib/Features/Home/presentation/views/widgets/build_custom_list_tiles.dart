@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'custom_list_tile.dart';
 
 class BuildCustomListTiles extends StatefulWidget {
@@ -44,21 +45,13 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
             status,
             style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
           ),
-          trailing: DropdownButton(
-            borderRadius: BorderRadius.circular(12),
-            underline: const SizedBox(),
+          trailing: CustomDropDownButton(
             onChanged: (value) {
               setState(() {
                 status = value!;
               });
             },
-            items: <String>['Waiting', 'Inprogress', 'Finished']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+            items: const ['Waiting', 'Inprogress', 'Finished'],
             icon: SvgPicture.asset('assets/images/arrow-down.svg'),
           ),
         ),
@@ -74,21 +67,13 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
               ),
             ],
           ),
-          trailing: DropdownButton(
-            borderRadius: BorderRadius.circular(12),
-            underline: const SizedBox(),
+          trailing: CustomDropDownButton(
             onChanged: (value) {
               setState(() {
                 priority = value!;
               });
             },
-            items: <String>['Low', 'Medium', 'High']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+            items: const ['Low', 'Medium', 'High'],
             icon: SvgPicture.asset('assets/images/arrow-down.svg'),
           ),
         ),

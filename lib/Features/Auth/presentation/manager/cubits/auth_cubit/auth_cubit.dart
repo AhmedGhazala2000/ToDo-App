@@ -11,7 +11,6 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._authRepo) : super(AuthInitialState());
   final AuthRepo _authRepo;
   String? selectedCountry = '+20';
-  String? experienceLevel;
   AuthResponseModel? authResponseModel;
 
   Future registerUser(RegisterRequestModel model) async {

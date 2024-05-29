@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
@@ -8,7 +9,6 @@ import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/widgets/register_button_bloc_consumer.dart';
 import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
-import 'get_experience_level.dart';
 import 'select_country.dart';
 
 class RegisterViewBody extends StatefulWidget {
@@ -44,10 +44,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Register',
-                  style: AppStyles.styleBold24
-                ),
+                const Text('Register', style: AppStyles.styleBold24),
                 const SizedBox(
                   height: 24,
                 ),
@@ -88,10 +85,24 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                   hintText: 'Choose experience Level:',
                   keyboardType: TextInputType.none,
                   isExperienceLevel: true,
-                  suffix: const GetExperienceLevel(),
-                  onSaved: (_) {
-                    experienceLevel = context.read<AuthCubit>().experienceLevel;
-                  },
+                  suffix: Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: CustomDropDownButton(
+                      onChanged: (value) {
+                        setState(() {
+                          experienceLevel = value;
+                        });
+                      },
+                      value: experienceLevel,
+                      items: const ['Fresh', 'Junior', 'MidLevel', 'Senior'],
+                      icon: const Icon(
+                        FontAwesomeIcons.angleDown,
+                        color: kFourthColor,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+                  experienceLevel: experienceLevel,
                 ),
                 const SizedBox(
                   height: 15,
@@ -139,7 +150,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                         displayName: name!,
                         experienceYears: experienceYears!,
                         address: address!,
-                        level: experienceLevel!,
+                        level: experienceLevel!.toLowerCase(),
                       );
                       await BlocProvider.of<AuthCubit>(context)
                           .registerUser(model);
@@ -170,7 +181,6 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  context.read<AuthCubit>().experienceLevel = null;
                 },
               ),
             ],
