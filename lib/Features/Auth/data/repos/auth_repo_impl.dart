@@ -9,10 +9,10 @@ import 'package:todo_app/Features/Auth/data/models/login_request_model.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
 import 'package:todo_app/Features/Auth/data/repos/auth_repo.dart';
 
-class RegisterRepoImpl implements AuthRepo {
+class AuthRepoImpl implements AuthRepo {
   final ApiServices _apiService;
 
-  RegisterRepoImpl(ApiServices apiService) : _apiService = apiService;
+  AuthRepoImpl(ApiServices apiService) : _apiService = apiService;
 
   // Register User
   @override
