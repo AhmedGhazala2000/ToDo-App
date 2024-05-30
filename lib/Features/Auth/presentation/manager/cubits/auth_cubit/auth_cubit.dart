@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
   String? selectedCountry = '+20';
   AuthResponseModel? authResponseModel;
 
+  // register cubit
   Future registerUser(RegisterRequestModel model) async {
     emit(RegisterLoadingState());
 
@@ -26,6 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  // login cubit
   Future loginUser(LoginRequestModel model) async {
     emit(LoginLoadingState());
 
@@ -36,6 +38,17 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoginSuccessState(success));
         authResponseModel = success;
       },
+    );
+  }
+
+  // logout cubit
+  Future logout() async {
+    emit(LogoutLoadingState());
+    final result =
+        await _authRepo.logout(token: authResponseModel!.accessToken);
+    result.fold(
+      (failure) => emit(LogoutFailureState(failure.errMessage)),
+      (success) => emit(LogoutSuccessState()),
     );
   }
 }

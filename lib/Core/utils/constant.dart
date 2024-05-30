@@ -16,6 +16,7 @@ const Color kFifthColor = Color(0xffBABABA);
 abstract class EndPoints {
   static const String register = 'auth/register';
   static const String login = 'auth/login';
+  static const String logout = 'auth/logout';
 }
 
 Map<String, WidgetBuilder> appRoutes() {

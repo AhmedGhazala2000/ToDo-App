@@ -8,7 +8,7 @@ class ApiServices {
 
   Future<Response> post({
     required String endPoint,
-    required bodyData,
+    bodyData,
     String? token,
     String? contentType,
   }) async {

@@ -14,6 +14,7 @@ class RegisterRepoImpl implements AuthRepo {
 
   RegisterRepoImpl(ApiServices apiService) : _apiService = apiService;
 
+  // Register User
   @override
   Future<Either<Failures, AuthResponseModel>> register(
       RegisterRequestModel model) async {
@@ -33,6 +34,7 @@ class RegisterRepoImpl implements AuthRepo {
     }
   }
 
+  // Login User
   @override
   Future<Either<Failures, AuthResponseModel>> login(
       LoginRequestModel model) async {
@@ -43,6 +45,25 @@ class RegisterRepoImpl implements AuthRepo {
       );
       AuthResponseModel data = AuthResponseModel.fromJson(response.data);
       return right(data);
+    } on DioException catch (e) {
+      log(e.response?.data["message"].toString() ?? e.toString());
+      return left(ServerFailure.fromDioException(dioException: e));
+    } catch (e) {
+      log(e.toString());
+      return left(ServerFailure(errMessage: e.toString()));
+    }
+  }
+
+  // Logout
+  @override
+  Future<Either<Failures, void>> logout({required String token}) async {
+    try {
+      var response = await _apiService.post(
+        endPoint: EndPoints.logout,
+        token: token,
+      );
+      log(response.data.toString());
+      return right(null);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
       return left(ServerFailure.fromDioException(dioException: e));

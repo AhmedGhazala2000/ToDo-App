@@ -8,4 +8,5 @@ abstract class AuthRepo {
   Future<Either<Failures, AuthResponseModel>> register(RegisterRequestModel model);
 
   Future<Either<Failures, AuthResponseModel>> login(LoginRequestModel model);
+  Future<Either<Failures, void>> logout({required String token});
 }
