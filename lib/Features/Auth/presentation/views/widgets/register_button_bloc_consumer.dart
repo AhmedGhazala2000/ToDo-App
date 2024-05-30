@@ -4,6 +4,7 @@ import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 
+import '../../../../../Core/widgets/custom_circular_indicator.dart';
 import '../../manager/cubits/auth_cubit/auth_cubit.dart';
 
 class RegisterButtonBlocConsumer extends StatelessWidget {
@@ -28,11 +29,7 @@ class RegisterButtonBlocConsumer extends StatelessWidget {
         return CustomButton(
           onPressed: onPressed,
           child: state is RegisterLoadingState
-              ? const SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(color: Colors.white),
-                )
+              ? const CustomCircularIndicator()
               : Text(
                   'Sign up',
                   style: AppStyles.styleBold16.copyWith(color: Colors.white),

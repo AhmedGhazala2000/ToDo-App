@@ -58,11 +58,10 @@ class RegisterRepoImpl implements AuthRepo {
   @override
   Future<Either<Failures, void>> logout({required String token}) async {
     try {
-      var response = await _apiService.post(
+      await _apiService.post(
         endPoint: EndPoints.logout,
         token: token,
       );
-      log(response.data.toString());
       return right(null);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
