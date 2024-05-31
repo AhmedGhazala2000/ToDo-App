@@ -13,6 +13,7 @@ const Color kSecondColor = Color(0xff24252C);
 const Color kThirdColor = Color(0xffF0ECFF);
 const Color kFourthColor = Color(0xff7F7F7F);
 const Color kFifthColor = Color(0xffBABABA);
+const String isFirstTime = 'isFirstTime';
 
 abstract class EndPoints {
   static const String register = 'auth/register';

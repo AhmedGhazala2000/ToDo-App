@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
+import 'package:todo_app/Features/Splash/presentation/views/splash_view.dart';
+
 import 'Core/utils/constant.dart';
 import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Auth/data/repos/auth_repo_impl.dart';
 import 'Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
-import 'Features/Auth/presentation/views/login_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObservers();
+  await CachedNetwork.init();
   setupServiceLocator();
   runApp(const ToDoApp());
 }
@@ -33,7 +37,7 @@ class ToDoApp extends StatelessWidget {
           ),
         ),
         routes: appRoutes(),
-        initialRoute: LoginView.id,
+        initialRoute: SplashView.id,
       ),
     );
   }

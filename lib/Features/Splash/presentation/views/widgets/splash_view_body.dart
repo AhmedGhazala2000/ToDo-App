@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
+import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
 import '../start_view.dart';
 
@@ -59,7 +62,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
   Future<dynamic> _navigateToNextPage() async {
     await Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, StartView.id),
+      () => Navigator.pushReplacementNamed(
+        context,
+        CachedNetwork.sharedPref.getBool(isFirstTime) == false
+            ? LoginView.id
+            : StartView.id,
+      ),
     );
   }
 }

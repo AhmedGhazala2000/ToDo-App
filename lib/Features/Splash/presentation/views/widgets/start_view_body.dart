@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
@@ -42,8 +44,9 @@ class StartViewBody extends StatelessWidget {
                 SvgPicture.asset('assets/images/arrow-right.svg'),
               ],
             ),
-            onPressed: () {
+            onPressed: () async {
               Navigator.pushReplacementNamed(context, LoginView.id);
+              await CachedNetwork.sharedPref.setBool(isFirstTime, false);
             },
           ),
         ),
