@@ -1,9 +1,9 @@
 class AuthResponseModel {
-  final String id, accessToken, refreshToken;
+  final String userId, accessToken, refreshToken;
   final String? displayName;
 
   AuthResponseModel({
-    required this.id,
+    required this.userId,
     this.displayName,
     required this.accessToken,
     required this.refreshToken,
@@ -11,7 +11,7 @@ class AuthResponseModel {
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
-      id: json['_id'],
+      userId: json['_id'],
       displayName: json['displayName'],
       accessToken: json['access_token'],
       refreshToken: json['refresh_token'],
@@ -20,7 +20,7 @@ class AuthResponseModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['_id'] = id;
+    map['_id'] = userId;
     map['displayName'] = displayName;
     map['access_token'] = accessToken;
     map['refresh_token'] = refreshToken;

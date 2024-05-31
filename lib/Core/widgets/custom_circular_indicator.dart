@@ -8,9 +8,12 @@ class CustomCircularIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 24,
-      width: 24,
-      child: CircularProgressIndicator(color: color ?? Colors.white),
+      height: 23,
+      width: 23,
+      child: CircularProgressIndicator(
+        color: color ?? Colors.white,
+        strokeWidth: 3,
+      ),
     );
   }
 }

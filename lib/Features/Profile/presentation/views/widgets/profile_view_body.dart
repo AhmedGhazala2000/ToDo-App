@@ -1,43 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:todo_app/Core/utils/constant.dart';
-import 'custom_list_tile.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
+import 'package:todo_app/Features/Profile/presentation/manager/cubits/profile_cubit.dart';
 
-class ProfileViewBody extends StatelessWidget {
+import 'display_profile_data.dart';
+
+class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
 
   @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+
+class _ProfileViewBodyState extends State<ProfileViewBody> {
+  @override
+  void initState() {
+    _triggerProfileCubit();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          const CustomListTile(title: 'NAME', subtitle: 'Islam Sayed'),
-          CustomListTile(
-            title: 'Phone',
-            subtitle: '+20 123 456-7890',
-            trailing: IconButton(
-              onPressed: () {
-                Clipboard.setData(
-                  const ClipboardData(text: '+20 123 456-7890'),
-                ).then(
-                  (_) => Fluttertoast.showToast(
-                    msg: 'Copied to clipboard',
-                    backgroundColor: const Color(0xffF5F5F5),
-                    textColor: const Color(0xff2F2F2F),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.copy, color: kPrimaryColor),
-            ),
-          ),
-          const CustomListTile(title: 'LEVEL', subtitle: 'Senior'),
-          const CustomListTile(
-              title: 'Years of experience', subtitle: '7 years'),
-          const CustomListTile(title: 'Location', subtitle: 'Mansoura, Egypt'),
-        ],
-      ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileSuccessState) {
+          return DisplayProfileData(user: state.userModel);
+        } else if (state is ProfileFailureState) {
+          return Center(
+            child: Text(state.errMessage,style: AppStyles.styleBold16),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
+  }
+
+  Future<void> _triggerProfileCubit() async {
+    String token = context.read<AuthCubit>().authResponseModel!.accessToken;
+    await BlocProvider.of<ProfileCubit>(context).getProfile(token: token);
   }
 }

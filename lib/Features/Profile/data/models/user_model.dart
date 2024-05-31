@@ -1,5 +1,5 @@
 class UserModel {
-  String? id;
+  String? userId;
   String? displayName;
   String? username;
   List<String>? roles;
@@ -12,7 +12,7 @@ class UserModel {
   int? v;
 
   UserModel(
-      {this.id,
+      {this.userId,
         this.displayName,
         this.username,
         this.roles,
@@ -25,7 +25,7 @@ class UserModel {
         this.v});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
+    userId = json['_id'];
     displayName = json['displayName'];
     username = json['username'];
     roles = json['roles'].cast<String>();
@@ -40,7 +40,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = id;
+    data['_id'] = userId;
     data['displayName'] = displayName;
     data['username'] = username;
     data['roles'] = roles;

@@ -30,7 +30,7 @@ class CustomHomeAppBar extends StatelessWidget {
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is LogoutSuccessState) {
-                showSnackBar(context, message: 'Logout Success');
+                showSnackBar(context, message: 'Logout Success', color: Colors.green);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   LoginView.id,
@@ -44,7 +44,7 @@ class CustomHomeAppBar extends StatelessWidget {
               return IconButton(
                 icon: state is LogoutLoadingState
                     ? const CustomCircularIndicator(
-                        color: Colors.grey,
+                        color: Colors.blue,
                       )
                     : const Icon(
                         Icons.logout,
