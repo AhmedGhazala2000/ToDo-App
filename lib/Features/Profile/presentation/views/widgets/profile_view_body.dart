@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/styles.dart';
-import 'package:todo_app/Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
 import 'package:todo_app/Features/Profile/presentation/manager/cubits/profile_cubit.dart';
 
 import 'display_profile_data.dart';
@@ -28,7 +27,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           return DisplayProfileData(user: state.userModel);
         } else if (state is ProfileFailureState) {
           return Center(
-            child: Text(state.errMessage,style: AppStyles.styleBold16),
+            child: Text(state.errMessage, style: AppStyles.styleBold16),
           );
         } else {
           return const Center(
@@ -40,7 +39,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
   }
 
   Future<void> _triggerProfileCubit() async {
-    String token = context.read<AuthCubit>().authResponseModel!.accessToken;
-    await BlocProvider.of<ProfileCubit>(context).getProfile(token: token);
+    await BlocProvider.of<ProfileCubit>(context).getProfile();
   }
 }

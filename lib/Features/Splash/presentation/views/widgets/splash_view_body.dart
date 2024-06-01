@@ -4,6 +4,7 @@ import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
+import '../../../../Home/presentation/views/home_view.dart';
 import '../start_view.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -64,10 +65,21 @@ class _SplashViewBodyState extends State<SplashViewBody>
       const Duration(seconds: 3),
       () => Navigator.pushReplacementNamed(
         context,
-        CachedNetwork.sharedPref.getBool(isFirstTime) == false
-            ? LoginView.id
-            : StartView.id,
+        getNextPage(),
       ),
     );
+  }
+
+  getNextPage() {
+    String token = CachedNetwork.sharedPref.getString(kAccessToken) ?? '';
+    bool isFirstTime = CachedNetwork.sharedPref.getBool(kIsFirstTime) ?? true;
+    if (token.isNotEmpty) {
+      return HomeView.id;
+    } else {
+      if (isFirstTime) {
+        return StartView.id;
+      }
+      return LoginView.id;
+    }
   }
 }

@@ -19,11 +19,7 @@ final class RegisterFailureState extends AuthState {
 // Login States
 final class LoginLoadingState extends AuthState {}
 
-final class LoginSuccessState extends AuthState {
-  final AuthResponseModel authResponseModel;
-
-  LoginSuccessState(this.authResponseModel);
-}
+final class LoginSuccessState extends AuthState {}
 
 final class LoginFailureState extends AuthState {
   final String errMessage;

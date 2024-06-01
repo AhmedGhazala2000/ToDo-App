@@ -22,7 +22,6 @@ class AuthCubit extends Cubit<AuthState> {
       (failure) => emit(RegisterFailureState(failure.errMessage)),
       (success) {
         emit(RegisterSuccessState());
-        authResponseModel = success;
       },
     );
   }
@@ -30,12 +29,11 @@ class AuthCubit extends Cubit<AuthState> {
   // login cubit
   Future loginUser(LoginRequestModel model) async {
     emit(LoginLoadingState());
-
     final result = await _authRepo.login(model);
     result.fold(
       (failure) => emit(LoginFailureState(failure.errMessage)),
       (success) {
-        emit(LoginSuccessState(success));
+        emit(LoginSuccessState());
         authResponseModel = success;
       },
     );
@@ -44,8 +42,7 @@ class AuthCubit extends Cubit<AuthState> {
   // logout cubit
   Future logout() async {
     emit(LogoutLoadingState());
-    final result =
-        await _authRepo.logout(token: authResponseModel!.accessToken);
+    final result = await _authRepo.logout();
     result.fold(
       (failure) => emit(LogoutFailureState(failure.errMessage)),
       (success) => emit(LogoutSuccessState()),

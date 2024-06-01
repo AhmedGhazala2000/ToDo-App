@@ -1,4 +1,10 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
+
+import 'constant.dart';
 
 class ApiServices {
   final Dio _dio;
@@ -7,12 +13,12 @@ class ApiServices {
   ApiServices(this._dio);
 
   //Post Request
-  Future<Response> post({
+  Future post({
     required String endPoint,
     bodyData,
-    String? token,
     String? contentType,
   }) async {
+    String token = await getToken();
     Response response = await _dio.post(
       '$_baseUrl/$endPoint',
       options: Options(
@@ -23,15 +29,16 @@ class ApiServices {
       ),
       data: bodyData,
     );
+
     return response;
   }
 
   //Get Request
   Future<Response> get({
     required String endPoint,
-    String? token,
     String? contentType,
   }) async {
+    String token = await getToken();
     Response response = await _dio.get(
       '$_baseUrl/$endPoint',
       options: Options(
@@ -41,6 +48,36 @@ class ApiServices {
         },
       ),
     );
+
     return response;
+  }
+
+  //Get Token
+  Future<String> getToken() async {
+    String? token = CachedNetwork.sharedPref.getString(kAccessToken);
+    if (token == null) return '';
+
+    if (JwtDecoder.isExpired(token)) {
+      token = await refreshToken();
+    }
+    return token;
+  }
+
+  //Refresh Token
+  Future<String> refreshToken() async {
+    try {
+      String refreshToken = CachedNetwork.sharedPref.getString(kRefreshToken)!;
+      Response response = await _dio.get(
+        '$_baseUrl/${EndPoints.refreshToken}?token=$refreshToken',
+      );
+      String newToken = response.data['access_token'];
+      CachedNetwork.sharedPref.setString(kAccessToken, newToken);
+      return newToken;
+    } on DioException catch (e) {
+      log(e.response?.data["message"].toString() ?? e.toString());
+    } catch (e) {
+      log(e.toString());
+    }
+    return '';
   }
 }

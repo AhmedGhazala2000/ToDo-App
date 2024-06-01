@@ -1,9 +1,11 @@
 import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:todo_app/Core/errors/failures.dart';
 import 'package:todo_app/Core/utils/api_services.dart';
 import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Features/Auth/data/models/auth_response_model.dart';
 import 'package:todo_app/Features/Auth/data/models/login_request_model.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
@@ -16,15 +18,13 @@ class AuthRepoImpl implements AuthRepo {
 
   // Register User
   @override
-  Future<Either<Failures, AuthResponseModel>> register(
-      RegisterRequestModel model) async {
+  Future<Either<Failures, void>> register(RegisterRequestModel model) async {
     try {
-      var response = await _apiService.post(
+      await _apiService.post(
         endPoint: EndPoints.register,
         bodyData: model.toJson(),
       );
-      AuthResponseModel data = AuthResponseModel.fromJson(response.data);
-      return right(data);
+      return right(null);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
       return left(ServerFailure.fromDioException(dioException: e));
@@ -44,6 +44,8 @@ class AuthRepoImpl implements AuthRepo {
         bodyData: model.toJson(),
       );
       AuthResponseModel data = AuthResponseModel.fromJson(response.data);
+      CachedNetwork.sharedPref.setString(kAccessToken, data.accessToken);
+      CachedNetwork.sharedPref.setString(kRefreshToken, data.refreshToken);
       return right(data);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
@@ -56,12 +58,13 @@ class AuthRepoImpl implements AuthRepo {
 
   // Logout
   @override
-  Future<Either<Failures, void>> logout({required String token}) async {
+  Future<Either<Failures, void>> logout() async {
     try {
       await _apiService.post(
         endPoint: EndPoints.logout,
-        token: token,
       );
+      CachedNetwork.sharedPref.remove(kAccessToken);
+      CachedNetwork.sharedPref.remove(kRefreshToken);
       return right(null);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());

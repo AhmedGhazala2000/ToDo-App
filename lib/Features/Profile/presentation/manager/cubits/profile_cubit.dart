@@ -8,9 +8,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this._profileRepo) : super(ProfileInitialState());
   final ProfileRepo _profileRepo;
 
-  Future getProfile({required String token}) async {
+  Future getProfile() async {
     emit(ProfileLoadingState());
-    final result = await _profileRepo.getProfile(token: token);
+    final result = await _profileRepo.getProfile();
     result.fold(
       (failure) => emit(ProfileFailureState(failure.errMessage)),
       (success) => emit(ProfileSuccessState(success)),

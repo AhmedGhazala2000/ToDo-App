@@ -46,7 +46,7 @@ class StartViewBody extends StatelessWidget {
             ),
             onPressed: () async {
               Navigator.pushReplacementNamed(context, LoginView.id);
-              await CachedNetwork.sharedPref.setBool(isFirstTime, false);
+              await CachedNetwork.sharedPref.setBool(kIsFirstTime, false);
             },
           ),
         ),

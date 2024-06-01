@@ -13,12 +13,15 @@ const Color kSecondColor = Color(0xff24252C);
 const Color kThirdColor = Color(0xffF0ECFF);
 const Color kFourthColor = Color(0xff7F7F7F);
 const Color kFifthColor = Color(0xffBABABA);
-const String isFirstTime = 'isFirstTime';
+const String kIsFirstTime = 'isFirstTime';
+const String kAccessToken = 'accessToken';
+const String kRefreshToken = 'refreshToken';
 
 abstract class EndPoints {
   static const String register = 'auth/register';
   static const String login = 'auth/login';
   static const String logout = 'auth/logout';
+  static const String refreshToken = 'auth/refresh-token';
   static const String profile = 'auth/profile';
 }
 
