@@ -15,7 +15,7 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<Either<Failures, List<TaskModel>>> fetchAllTasks(
-      {required String pageNumber}) async {
+      {required int pageNumber}) async {
     try {
       Response response = await _apiServices.get(
         endPoint: '${EndPoints.todos}?page=$pageNumber',

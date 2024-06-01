@@ -5,5 +5,5 @@ import '../models/task_model.dart';
 
 abstract class HomeRepo {
   Future<Either<Failures, List<TaskModel>>> fetchAllTasks(
-      {required String pageNumber});
+      {required int pageNumber});
 }

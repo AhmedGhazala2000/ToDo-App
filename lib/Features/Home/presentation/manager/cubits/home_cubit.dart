@@ -9,7 +9,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitial());
   final HomeRepo _homeRepo;
 
-  Future fetchAllTasks({required String pageNumber}) async {
+  Future fetchAllTasks({required int pageNumber}) async {
     emit(HomeLoadingState());
     final result = await _homeRepo.fetchAllTasks(pageNumber: pageNumber);
     result.fold(
