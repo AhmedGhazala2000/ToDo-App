@@ -8,9 +8,8 @@ class TaskWidgetListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: 4,
+    return SliverList.builder(
+      itemCount: 20,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Features/Profile/data/models/user_model.dart';
+
 import 'custom_list_tile.dart';
 
 class DisplayProfileData extends StatelessWidget {
@@ -19,7 +20,7 @@ class DisplayProfileData extends StatelessWidget {
           children: [
             CustomListTile(title: 'NAME', subtitle: user.displayName!),
             CustomListTile(
-              title: 'Phone',
+              title: 'PHONE',
               subtitle: user.username!,
               trailing: IconButton(
                 onPressed: () {
@@ -38,9 +39,9 @@ class DisplayProfileData extends StatelessWidget {
             ),
             CustomListTile(title: 'LEVEL', subtitle: user.level!),
             CustomListTile(
-                title: 'Years of experience',
+                title: 'YEARS OF EXPERIENCE',
                 subtitle: user.experienceYears!.toString()),
-            CustomListTile(title: 'Location', subtitle: user.address!),
+            CustomListTile(title: 'LOCATION', subtitle: user.address!),
           ],
         ),
       ),
