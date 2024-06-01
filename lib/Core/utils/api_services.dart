@@ -18,7 +18,7 @@ class ApiServices {
     bodyData,
     String? contentType,
   }) async {
-    String token = await getToken();
+    String token = await _getToken();
     Response response = await _dio.post(
       '$_baseUrl/$endPoint',
       options: Options(
@@ -38,7 +38,7 @@ class ApiServices {
     required String endPoint,
     String? contentType,
   }) async {
-    String token = await getToken();
+    String token = await _getToken();
     Response response = await _dio.get(
       '$_baseUrl/$endPoint',
       options: Options(
@@ -53,18 +53,18 @@ class ApiServices {
   }
 
   //Get Token
-  Future<String> getToken() async {
+  Future<String> _getToken() async {
     String? token = CachedNetwork.sharedPref.getString(kAccessToken);
     if (token == null) return '';
 
     if (JwtDecoder.isExpired(token)) {
-      token = await refreshToken();
+      token = await _refreshToken();
     }
     return token;
   }
 
   //Refresh Token
-  Future<String> refreshToken() async {
+  Future<String> _refreshToken() async {
     try {
       String refreshToken = CachedNetwork.sharedPref.getString(kRefreshToken)!;
       Response response = await _dio.get(
