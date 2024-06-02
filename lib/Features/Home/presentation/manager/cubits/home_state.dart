@@ -7,11 +7,7 @@ final class HomeInitial extends HomeState {}
 
 final class HomeLoadingState extends HomeState {}
 
-final class HomeSuccessState extends HomeState {
-  final List<TaskModel> todos;
-
-  HomeSuccessState(this.todos);
-}
+final class HomeSuccessState extends HomeState {}
 
 final class HomeFailureState extends HomeState {
   final String errMessage;

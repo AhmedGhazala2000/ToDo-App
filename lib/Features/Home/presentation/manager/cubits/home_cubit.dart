@@ -8,13 +8,17 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitial());
   final HomeRepo _homeRepo;
+  List<TaskModel> tasks = [];
 
   Future fetchAllTasks({required int pageNumber}) async {
     emit(HomeLoadingState());
     final result = await _homeRepo.fetchAllTasks(pageNumber: pageNumber);
     result.fold(
       (failure) => emit(HomeFailureState(failure.errMessage)),
-      (success) => emit(HomeSuccessState(success)),
+      (success) {
+        emit(HomeSuccessState());
+        tasks.addAll(success);
+      },
     );
   }
 }

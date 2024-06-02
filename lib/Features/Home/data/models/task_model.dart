@@ -6,8 +6,8 @@ class TaskModel {
   String? priority;
   String? status;
   String? userId;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   int? iV;
 
   TaskModel(
@@ -30,8 +30,8 @@ class TaskModel {
     priority = json['priority'];
     status = json['status'];
     userId = json['user'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
+    createdAt = DateTime.parse(json['createdAt']);
+    updatedAt = DateTime.parse(json['updatedAt']);
     iV = json['__v'];
   }
 

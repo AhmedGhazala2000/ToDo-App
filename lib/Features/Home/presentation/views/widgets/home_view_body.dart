@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
 
 import 'custom_home_app_bar.dart';
-import 'my_tasks_section.dart';
+import 'home_view_body_bloc_builder.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -19,10 +19,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     super.initState();
   }
 
-  void _triggerHomeCubit() async {
-    await BlocProvider.of<HomeCubit>(context).fetchAllTasks(pageNumber: 1);
-  }
-
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -30,9 +26,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       child: Column(
         children: [
           CustomHomeAppBar(),
-          Expanded(child: MyTasksSection()),
+          Expanded(child: HomeViewBodyBlocBuilder()),
         ],
       ),
     );
+  }
+
+  void _triggerHomeCubit() async {
+    await BlocProvider.of<HomeCubit>(context).fetchAllTasks(pageNumber: 1);
   }
 }

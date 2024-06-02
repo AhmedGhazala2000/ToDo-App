@@ -4,10 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Features/Home/data/models/task_model.dart';
+
 import 'custom_list_tile.dart';
 
 class BuildCustomListTiles extends StatefulWidget {
-  const BuildCustomListTiles({super.key});
+  const BuildCustomListTiles({super.key, required this.task});
+
+  final TaskModel task;
 
   @override
   State<BuildCustomListTiles> createState() => _BuildCustomListTilesState();
@@ -42,13 +46,13 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
         const SizedBox(height: 8),
         CustomListTile(
           title: Text(
-            status,
+            widget.task.status!,
             style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
           ),
           trailing: CustomDropDownButton(
             onChanged: (value) {
               setState(() {
-                status = value!;
+                widget.task.status = value!;
               });
             },
             items: const ['Waiting', 'Inprogress', 'Finished'],
@@ -62,7 +66,7 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
               SvgPicture.asset('assets/images/flag.svg'),
               const SizedBox(width: 10),
               Text(
-                '$priority Priority',
+                '${widget.task.priority} Priority',
                 style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
               ),
             ],
@@ -70,7 +74,7 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
           trailing: CustomDropDownButton(
             onChanged: (value) {
               setState(() {
-                priority = value!;
+                widget.task.priority = value!;
               });
             },
             items: const ['Low', 'Medium', 'High'],

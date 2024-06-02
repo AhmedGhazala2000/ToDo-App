@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TaskImage extends StatelessWidget {
-  const TaskImage({super.key, this.aspectRatio});
+  const TaskImage({super.key, this.aspectRatio, required this.imageUrl});
 
   final double? aspectRatio;
-  final String imageUrl =
-      'https://th.bing.com/th/id/OIP.IcOIf38lUmebdO7EEKkRmgHaKQ?rs=1&pid=ImgDetMain';
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
