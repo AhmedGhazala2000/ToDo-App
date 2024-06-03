@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Features/Home/data/models/task_model.dart';
 import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
 
 import 'my_tasks_section.dart';
@@ -17,6 +18,7 @@ class HomeViewBodyBlocBuilder extends StatefulWidget {
 class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
   late final ScrollController _scrollController;
   bool isLoading = false;
+  List<TaskModel> todos = [];
 
   @override
   void initState() {
@@ -35,8 +37,8 @@ class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        if (state is HomeLoadingPaginationState) {
-          showSnackBar(context, message: 'Loading....', color: Colors.blue);
+        if (state is HomeSuccessState) {
+          todos.addAll(state.tasks);
         } else if (state is HomeFailurePaginationState) {
           showSnackBar(context, message: state.errMessage, color: Colors.red);
         }
@@ -45,7 +47,10 @@ class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
         if (state is HomeSuccessState ||
             state is HomeLoadingPaginationState ||
             state is HomeFailurePaginationState) {
-          return MyTasksSection(controller: _scrollController);
+          return MyTasksSection(
+            controller: _scrollController,
+            todos: todos,
+          );
         } else if (state is HomeFailureState) {
           return Center(
             child: Text(state.errMessage, style: AppStyles.styleBold16),
@@ -60,9 +65,12 @@ class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
   }
 
   void _scrollListener() async {
-    var currentPosition = _scrollController.position.pixels;
-    var maxScrollLength = _scrollController.position.maxScrollExtent;
-    if (currentPosition >= .75 * maxScrollLength && !isLoading) {
+    final currentPosition = _scrollController.position.pixels;
+    final maxScrollLength = _scrollController.position.maxScrollExtent;
+    final isNearEnd = currentPosition >= .75 * maxScrollLength;
+    final homeCubit = BlocProvider.of<HomeCubit>(context);
+
+    if (isNearEnd && !isLoading && homeCubit.hasMoreTasks) {
       isLoading = true;
       await BlocProvider.of<HomeCubit>(context).fetchAllTasks();
       isLoading = false;

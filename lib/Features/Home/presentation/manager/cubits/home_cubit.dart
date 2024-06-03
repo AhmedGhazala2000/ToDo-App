@@ -8,10 +8,13 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitial());
   final HomeRepo _homeRepo;
-  List<TaskModel> tasks = [];
   int _currentPage = 1;
+  bool hasMoreTasks = true;
+  int trigger = 1;
 
   Future fetchAllTasks() async {
+    if (!hasMoreTasks) return;
+
     emit(
       _currentPage == 1 ? HomeLoadingState() : HomeLoadingPaginationState(),
     );
@@ -26,11 +29,12 @@ class HomeCubit extends Cubit<HomeState> {
         );
       },
       (success) {
-        if (success.isNotEmpty) {
-          tasks.addAll(success);
+        if (success.isEmpty) {
+          hasMoreTasks = false;
+        } else {
           _currentPage++;
         }
-        emit(HomeSuccessState());
+        emit(HomeSuccessState(tasks: success));
       },
     );
   }
