@@ -1,19 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
 
 import 'my_tasks_section.dart';
 
-class HomeViewBodyBlocBuilder extends StatelessWidget {
+class HomeViewBodyBlocBuilder extends StatefulWidget {
   const HomeViewBodyBlocBuilder({super.key});
 
   @override
+  State<HomeViewBodyBlocBuilder> createState() =>
+      _HomeViewBodyBlocBuilderState();
+}
+
+class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
+  late final ScrollController _scrollController;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is HomeLoadingPaginationState) {
+          showSnackBar(context, message: 'Loading....', color: Colors.blue);
+        } else if (state is HomeFailurePaginationState) {
+          showSnackBar(context, message: state.errMessage, color: Colors.red);
+        }
+      },
       builder: (context, state) {
-        if (state is HomeSuccessState) {
-          return const MyTasksSection();
+        if (state is HomeSuccessState ||
+            state is HomeLoadingPaginationState ||
+            state is HomeFailurePaginationState) {
+          return MyTasksSection(controller: _scrollController);
         } else if (state is HomeFailureState) {
           return Center(
             child: Text(state.errMessage, style: AppStyles.styleBold16),
@@ -25,5 +57,15 @@ class HomeViewBodyBlocBuilder extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _scrollListener() async {
+    var currentPosition = _scrollController.position.pixels;
+    var maxScrollLength = _scrollController.position.maxScrollExtent;
+    if (currentPosition >= .75 * maxScrollLength && !isLoading) {
+      isLoading = true;
+      await BlocProvider.of<HomeCubit>(context).fetchAllTasks();
+      isLoading = false;
+    }
   }
 }

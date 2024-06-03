@@ -14,3 +14,11 @@ final class HomeFailureState extends HomeState {
 
   HomeFailureState(this.errMessage);
 }
+
+final class HomeLoadingPaginationState extends HomeState {}
+
+final class HomeFailurePaginationState extends HomeState {
+  final String errMessage;
+
+  HomeFailurePaginationState(this.errMessage);
+}

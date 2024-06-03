@@ -20,6 +20,7 @@ class HomeRepoImpl implements HomeRepo {
       Response response = await _apiServices.get(
         endPoint: '${EndPoints.todos}?page=$pageNumber',
       );
+      if (response.data.isEmpty) return right([]);
       List<TaskModel> todos = [];
       for (var task in response.data) {
         todos.add(TaskModel.fromJson(task));

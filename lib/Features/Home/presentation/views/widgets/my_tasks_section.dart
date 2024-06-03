@@ -5,13 +5,16 @@ import 'select_tasks_items_list_view.dart';
 import 'task_widget_list_view.dart';
 
 class MyTasksSection extends StatelessWidget {
-  const MyTasksSection({super.key});
+  const MyTasksSection({super.key, this.controller});
+
+  final ScrollController? controller;
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      physics: BouncingScrollPhysics(),
-      slivers: [
+    return CustomScrollView(
+      controller: controller,
+      physics: const BouncingScrollPhysics(),
+      slivers: const [
         SliverToBoxAdapter(
           child: SizedBox(height: 24),
         ),

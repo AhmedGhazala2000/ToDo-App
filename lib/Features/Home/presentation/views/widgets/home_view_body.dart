@@ -33,6 +33,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   }
 
   void _triggerHomeCubit() async {
-    await BlocProvider.of<HomeCubit>(context).fetchAllTasks(pageNumber: 1);
+    await BlocProvider.of<HomeCubit>(context).fetchAllTasks();
   }
 }

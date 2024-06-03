@@ -9,15 +9,28 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitial());
   final HomeRepo _homeRepo;
   List<TaskModel> tasks = [];
+  int _currentPage = 1;
 
-  Future fetchAllTasks({required int pageNumber}) async {
-    emit(HomeLoadingState());
-    final result = await _homeRepo.fetchAllTasks(pageNumber: pageNumber);
+  Future fetchAllTasks() async {
+    emit(
+      _currentPage == 1 ? HomeLoadingState() : HomeLoadingPaginationState(),
+    );
+
+    final result = await _homeRepo.fetchAllTasks(pageNumber: _currentPage);
     result.fold(
-      (failure) => emit(HomeFailureState(failure.errMessage)),
+      (failure) {
+        emit(
+          _currentPage == 1
+              ? HomeFailureState(failure.errMessage)
+              : HomeFailurePaginationState(failure.errMessage),
+        );
+      },
       (success) {
+        if (success.isNotEmpty) {
+          tasks.addAll(success);
+          _currentPage++;
+        }
         emit(HomeSuccessState());
-        tasks.addAll(success);
       },
     );
   }
