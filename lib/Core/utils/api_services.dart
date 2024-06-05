@@ -15,7 +15,7 @@ class ApiServices {
   //Post Request
   Future post({
     required String endPoint,
-    bodyData,
+    Object? bodyData,
     String? contentType,
   }) async {
     String token = await _getToken();
