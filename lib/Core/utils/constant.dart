@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Features/Profile/presentation/views/profile_view.dart';
 
+import '../../Features/Add/presentation/views/add_task_view.dart';
 import '../../Features/Auth/presentation/views/login_view.dart';
 import '../../Features/Auth/presentation/views/register_view.dart';
 import '../../Features/Home/presentation/views/home_view.dart';
@@ -35,5 +36,6 @@ Map<String, WidgetBuilder> appRoutes() {
     HomeView.id: (context) => const HomeView(),
     ProfileView.id: (context) => const ProfileView(),
     TaskDetailsView.id: (context) => const TaskDetailsView(),
+    AddTaskView.id: (context) => const AddTaskView(),
   };
 }

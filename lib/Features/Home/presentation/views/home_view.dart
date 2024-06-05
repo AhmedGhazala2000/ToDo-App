@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/service_locator.dart';
+import 'package:todo_app/Features/Add/presentation/views/add_task_view.dart';
 import 'package:todo_app/Features/Home/data/repos/home_repo_impl.dart';
 import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
 
@@ -36,7 +37,9 @@ class HomeView extends StatelessWidget {
                   heroTag: 'add',
                   backgroundColor: kPrimaryColor,
                   shape: const CircleBorder(),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AddTaskView.id);
+                  },
                   child: const Icon(Icons.add, color: Colors.white),
                 ),
               ],
