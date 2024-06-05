@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:todo_app/Core/function/get_priority_color.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
 class TaskPriority extends StatelessWidget {
@@ -14,8 +15,8 @@ class TaskPriority extends StatelessWidget {
         SvgPicture.asset(
           'assets/images/flag.svg',
           colorFilter: ColorFilter.mode(
-            getColor(priority),
-            BlendMode.modulate,
+            getPriorityColor(priority),
+            BlendMode.srcIn,
           ),
           width: 16,
         ),
@@ -23,21 +24,10 @@ class TaskPriority extends StatelessWidget {
         Text(
           priority,
           style: AppStyles.styleMedium12.copyWith(
-            color: getColor(priority),
+            color: getPriorityColor(priority),
           ),
         )
       ],
     );
-  }
-
-  getColor(String priority) {
-    switch (priority.toLowerCase()) {
-      case 'low':
-        return const Color(0xff0087FF);
-      case 'medium':
-        return const Color(0xff5F33E1);
-      case 'high':
-        return const Color(0xffFF7D53);
-    }
   }
 }

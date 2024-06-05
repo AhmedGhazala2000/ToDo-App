@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
+import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/widgets/register_button_bloc_consumer.dart';
+
+import '../../../../../Core/widgets/custom_text_form_field.dart';
 import '../../manager/cubits/auth_cubit/auth_cubit.dart';
-import 'custom_text_form_field.dart';
 import 'select_country.dart';
 
 class RegisterViewBody extends StatefulWidget {

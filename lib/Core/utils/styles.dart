@@ -20,4 +20,8 @@ abstract class AppStyles {
     fontWeight: FontWeight.w500,
     fontSize: 12,
   );
+  static const TextStyle styleRegular12 = TextStyle(
+    fontSize: 12,
+    color: Color(0xff6E6A7C),
+  );
 }

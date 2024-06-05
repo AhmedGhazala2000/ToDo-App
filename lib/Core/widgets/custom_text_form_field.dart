@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onSaved,
     this.readOnly = false,
     this.experienceLevel,
+    this.maxLines,
   });
 
   final Widget? prefix;
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? readOnly;
   final void Function(String?)? onSaved;
   final String? experienceLevel;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,7 @@ class CustomTextFormField extends StatelessWidget {
             return 'Please select your level';
           }
           return null;
-        }
-        else if (text!.isEmpty) {
+        } else if (text!.isEmpty) {
           return 'This field is required';
         }
         return null;
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
       onSaved: onSaved,
       obscureText: obscureText!,
       keyboardType: keyboardType,
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
@@ -61,7 +63,7 @@ class CustomTextFormField extends StatelessWidget {
 
   OutlineInputBorder customOutlineInputBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(15),
       borderSide: const BorderSide(
         color: kFifthColor,
       ),

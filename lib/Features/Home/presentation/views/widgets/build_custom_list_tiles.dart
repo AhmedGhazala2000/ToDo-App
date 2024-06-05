@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
+import 'package:todo_app/Core/widgets/show_date_piker.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
 
 import 'custom_list_tile.dart';
@@ -18,10 +20,6 @@ class BuildCustomListTiles extends StatefulWidget {
 }
 
 class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
-  DateTime? _selectedDate = DateTime.now();
-  String status = 'Inprogress';
-  String priority = 'Medium';
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,13 +33,10 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
             ),
           ),
           subtitle: Text(
-            DateFormat('d MMMM, yyyy').format(_selectedDate!),
+            DateFormat('d MMMM, yyyy').format(widget.task.createdAt!),
             style: const TextStyle(color: kSecondColor),
           ),
-          trailing: InkWell(
-            onTap: _showDatePiker,
-            child: SvgPicture.asset('assets/images/calendar.svg'),
-          ),
+          trailing: ShowDatePiker(selectedDate: widget.task.createdAt!),
         ),
         const SizedBox(height: 8),
         CustomListTile(
@@ -60,45 +55,8 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
           ),
         ),
         const SizedBox(height: 8),
-        CustomListTile(
-          title: Row(
-            children: [
-              SvgPicture.asset('assets/images/flag.svg'),
-              const SizedBox(width: 10),
-              Text(
-                '${widget.task.priority} Priority',
-                style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
-              ),
-            ],
-          ),
-          trailing: CustomDropDownButton(
-            onChanged: (value) {
-              setState(() {
-                widget.task.priority = value!;
-              });
-            },
-            items: const ['Low', 'Medium', 'High'],
-            icon: SvgPicture.asset('assets/images/arrow-down.svg'),
-          ),
-        ),
+        CustomPriorityListTile(priority: widget.task.priority!),
       ],
-    );
-  }
-
-  void _showDatePiker() {
-    showDatePicker(
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
-    ).then(
-      (value) {
-        if (value != null && value != _selectedDate) {
-          setState(() {
-            _selectedDate = value;
-          });
-        }
-      },
     );
   }
 }
