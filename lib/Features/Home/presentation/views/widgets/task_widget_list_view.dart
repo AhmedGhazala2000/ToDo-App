@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/widgets/custom_circular_indicator.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
-import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
+import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo_app/Features/Home/presentation/views/widgets/task_widget.dart';
 
 import '../task_details_view.dart';

@@ -9,7 +9,7 @@ import 'package:todo_app/Features/Auth/presentation/views/register_view.dart';
 import 'package:todo_app/Features/Auth/presentation/views/widgets/login_button_bloc_consumer.dart';
 
 import '../../../../../Core/widgets/custom_text_form_field.dart';
-import '../../manager/cubits/auth_cubit/auth_cubit.dart';
+import '../../manager/auth_cubit/auth_cubit.dart';
 import 'select_country.dart';
 
 class LoginViewBody extends StatefulWidget {

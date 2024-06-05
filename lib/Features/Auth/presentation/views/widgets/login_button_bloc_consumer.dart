@@ -6,7 +6,7 @@ import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Home/presentation/views/home_view.dart';
 
 import '../../../../../Core/widgets/custom_circular_indicator.dart';
-import '../../manager/cubits/auth_cubit/auth_cubit.dart';
+import '../../manager/auth_cubit/auth_cubit.dart';
 
 class LoginButtonBlocConsumer extends StatelessWidget {
   const LoginButtonBlocConsumer({super.key, required this.onPressed});
@@ -33,7 +33,7 @@ class LoginButtonBlocConsumer extends StatelessWidget {
         return CustomButton(
           onPressed: onPressed,
           child: state is LoginLoadingState
-              ?  const CustomCircularIndicator()
+              ? const CustomCircularIndicator()
               : Text(
                   'Sign In',
                   style: AppStyles.styleBold16.copyWith(color: Colors.white),

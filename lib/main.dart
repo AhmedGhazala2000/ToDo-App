@@ -7,7 +7,7 @@ import 'Core/utils/constant.dart';
 import 'Core/utils/service_locator.dart';
 import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Auth/data/repos/auth_repo_impl.dart';
-import 'Features/Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
+import 'Features/Auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

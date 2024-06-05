@@ -7,7 +7,7 @@ import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 import 'package:todo_app/Features/Profile/presentation/views/profile_view.dart';
 
 import '../../../../../Core/widgets/custom_circular_indicator.dart';
-import '../../../../Auth/presentation/manager/cubits/auth_cubit/auth_cubit.dart';
+import '../../../../Auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
@@ -30,7 +30,8 @@ class CustomHomeAppBar extends StatelessWidget {
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is LogoutSuccessState) {
-                showSnackBar(context, message: 'Logout Success', color: Colors.green);
+                showSnackBar(context,
+                    message: 'Logout Success', color: Colors.green);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   LoginView.id,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/Features/Home/presentation/manager/cubits/home_cubit.dart';
+import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubit.dart';
 
 import 'custom_home_app_bar.dart';
 import 'home_view_body_bloc_builder.dart';

@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
-import '../../manager/cubits/auth_cubit/auth_cubit.dart';
+
+import '../../manager/auth_cubit/auth_cubit.dart';
 
 class SelectCountry extends StatefulWidget {
   const SelectCountry({super.key});

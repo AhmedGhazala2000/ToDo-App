@@ -9,7 +9,7 @@ import 'package:todo_app/Features/Auth/data/models/register_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/widgets/register_button_bloc_consumer.dart';
 
 import '../../../../../Core/widgets/custom_text_form_field.dart';
-import '../../manager/cubits/auth_cubit/auth_cubit.dart';
+import '../../manager/auth_cubit/auth_cubit.dart';
 import 'select_country.dart';
 
 class RegisterViewBody extends StatefulWidget {
