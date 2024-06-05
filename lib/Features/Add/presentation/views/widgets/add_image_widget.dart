@@ -1,0 +1,37 @@
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+
+class AddImageWidget extends StatelessWidget {
+  const AddImageWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DottedBorder(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      borderType: BorderType.RRect,
+      radius: const Radius.circular(12),
+      dashPattern: const [2, 2],
+      color: kPrimaryColor,
+      child: GestureDetector(
+        onTap: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset('assets/images/addImg_icon.svg'),
+            const SizedBox(width: 8),
+            const Text(
+              'Add Img',
+              style: TextStyle(
+                color: kPrimaryColor,
+                fontSize: 19,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
