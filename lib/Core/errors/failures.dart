@@ -52,17 +52,17 @@ class ServerFailure extends Failures {
   }
 
   factory ServerFailure.fromResponse({int? statusCode, dynamic response}) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403|| statusCode == 422) {
+    if (statusCode == 400 ||
+        statusCode == 401 ||
+        statusCode == 403 ||
+        statusCode == 422 ||
+        statusCode == 500) {
       return ServerFailure(
         errMessage: response['message'],
       );
     } else if (statusCode == 404) {
       return ServerFailure(
         errMessage: 'Your request not found, please try again',
-      );
-    } else if (statusCode == 500) {
-      return ServerFailure(
-        errMessage: 'Internal server error, please try later',
       );
     } else {
       return ServerFailure(

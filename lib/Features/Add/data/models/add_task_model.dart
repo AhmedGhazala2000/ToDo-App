@@ -1,12 +1,13 @@
 class AddTaskModel {
-  final String image, title, desc, priority, dueDate;
+  final String image, title, desc, priority;
+  final String? dueDate;
 
   const AddTaskModel({
     required this.image,
     required this.title,
     required this.desc,
     required this.priority,
-    required this.dueDate,
+    this.dueDate,
   });
 
   Map<String, dynamic> toJson() {
