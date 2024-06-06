@@ -5,7 +5,6 @@ import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
 
 import 'custom_popup_menu_button.dart';
-import 'task_image.dart';
 import 'task_priority.dart';
 import 'task_status.dart';
 
@@ -22,9 +21,12 @@ class TaskWidget extends StatelessWidget {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 64),
-            child: TaskImage(
-              imageUrl: task.image ??
-                  'https://th.bing.com/th/id/OIP.IcOIf38lUmebdO7EEKkRmgHaKQ?rs=1&pid=ImgDetMain',
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.file(
+                task.image!,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(width: 12),

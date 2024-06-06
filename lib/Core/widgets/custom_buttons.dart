@@ -61,6 +61,7 @@ class CustomDropDownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
+      dropdownColor: kThirdColor,
       borderRadius: BorderRadius.circular(12),
       underline: const SizedBox(),
       value: value,

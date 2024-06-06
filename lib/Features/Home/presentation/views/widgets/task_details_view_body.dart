@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
-import 'package:todo_app/Features/Home/presentation/views/widgets/task_image.dart';
 
 import 'build_custom_list_tiles.dart';
 
@@ -17,10 +16,11 @@ class TaskDetailsViewBody extends StatelessWidget {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 375),
-            child: TaskImage(
-              aspectRatio: 375 / 225,
-              imageUrl: task.image ??
-                  'https://th.bing.com/th/id/OIP.IcOIf38lUmebdO7EEKkRmgHaKQ?rs=1&pid=ImgDetMain',
+            child: AspectRatio(
+              aspectRatio: 1.5 / 1,
+              child: Image.file(
+                task.image!,
+              ),
             ),
           ),
           Padding(

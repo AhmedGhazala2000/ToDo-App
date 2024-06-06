@@ -9,11 +9,12 @@ class CustomTextFormField extends StatelessWidget {
     this.suffix,
     this.keyboardType,
     this.obscureText = false,
-    this.isExperienceLevel = false,
-    this.onSaved,
     this.readOnly = false,
-    this.experienceLevel,
     this.maxLines = 1,
+    this.isExperienceLevel = false,
+    this.experienceLevel,
+    this.isDueDate = false,
+    this.onSaved,
   });
 
   final Widget? prefix;
@@ -21,11 +22,13 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final bool? obscureText;
-  final bool? isExperienceLevel;
   final bool? readOnly;
-  final void Function(String?)? onSaved;
+  final bool? isExperienceLevel;
+  final bool? isDueDate;
+
   final String? experienceLevel;
   final int? maxLines;
+  final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,8 @@ class CustomTextFormField extends StatelessWidget {
           if (experienceLevel == null) {
             return 'Please select your level';
           }
+          return null;
+        } else if (isDueDate!) {
           return null;
         } else if (text!.isEmpty) {
           return 'This field is required';
