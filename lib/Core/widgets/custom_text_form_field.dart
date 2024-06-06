@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onSaved,
     this.readOnly = false,
     this.experienceLevel,
-    this.maxLines,
+    this.maxLines = 1,
   });
 
   final Widget? prefix;

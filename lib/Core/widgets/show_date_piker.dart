@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ShowDatePiker extends StatefulWidget {
-  ShowDatePiker({super.key, required this.selectedDate});
+class ShowDatePiker extends StatelessWidget {
+  const ShowDatePiker(
+      {super.key, required this.onValue, required this.selectedDate});
 
-  DateTime selectedDate;
+  final Function(DateTime?) onValue;
+  final DateTime selectedDate;
 
-  @override
-  State<ShowDatePiker> createState() => _ShowDatePikerState();
-}
-
-class _ShowDatePikerState extends State<ShowDatePiker> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _showDatePiker,
+      onTap: () {
+        _showDatePiker(context);
+      },
       child: SvgPicture.asset(
         'assets/images/calendar.svg',
         fit: BoxFit.scaleDown,
@@ -22,20 +21,12 @@ class _ShowDatePikerState extends State<ShowDatePiker> {
     );
   }
 
-  void _showDatePiker() {
+  void _showDatePiker(BuildContext context) {
     showDatePicker(
       context: context,
-      initialDate: widget.selectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2020),
       lastDate: DateTime(2030),
-    ).then(
-      (value) {
-        if (value != null && value != widget.selectedDate) {
-          setState(() {
-            widget.selectedDate = value;
-          });
-        }
-      },
-    );
+    ).then(onValue);
   }
 }

@@ -36,7 +36,16 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
             DateFormat('d MMMM, yyyy').format(widget.task.createdAt!),
             style: const TextStyle(color: kSecondColor),
           ),
-          trailing: ShowDatePiker(selectedDate: widget.task.createdAt!),
+          trailing: ShowDatePiker(
+            selectedDate: widget.task.createdAt!,
+            onValue: (value) {
+              if (value != null && value != widget.task.createdAt) {
+                setState(() {
+                  widget.task.createdAt = value;
+                });
+              }
+            },
+          ),
         ),
         const SizedBox(height: 8),
         CustomListTile(
@@ -55,7 +64,14 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
           ),
         ),
         const SizedBox(height: 8),
-        CustomPriorityListTile(priority: widget.task.priority!),
+        CustomPriorityListTile(
+          priority: widget.task.priority!,
+          onChanged: (value) {
+            setState(() {
+              widget.task.priority = value!;
+            });
+          },
+        ),
       ],
     );
   }

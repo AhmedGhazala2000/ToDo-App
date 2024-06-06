@@ -6,9 +6,11 @@ import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Home/presentation/views/widgets/custom_list_tile.dart';
 
 class CustomPriorityListTile extends StatefulWidget {
-  CustomPriorityListTile({super.key, required this.priority});
+  const CustomPriorityListTile(
+      {super.key, required this.onChanged, required this.priority});
 
-  String priority;
+  final void Function(String?)? onChanged;
+  final String priority;
 
   @override
   State<CustomPriorityListTile> createState() => _CustomPriorityListTileState();
@@ -36,11 +38,7 @@ class _CustomPriorityListTileState extends State<CustomPriorityListTile> {
         ],
       ),
       trailing: CustomDropDownButton(
-        onChanged: (value) {
-          setState(() {
-            widget.priority = value!;
-          });
-        },
+        onChanged: widget.onChanged,
         items: const ['Low', 'Medium', 'High'],
         icon: SvgPicture.asset('assets/images/arrow-down.svg'),
       ),
