@@ -5,12 +5,14 @@ import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
 class AddImageWidget extends StatelessWidget {
-  const AddImageWidget({super.key});
+  const AddImageWidget({super.key, this.onTap});
+
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: DottedBorder(
         padding: const EdgeInsets.symmetric(vertical: 16),
         borderType: BorderType.RRect,

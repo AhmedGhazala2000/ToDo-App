@@ -8,6 +8,7 @@ part 'add_task_state.dart';
 class AddTaskCubit extends Cubit<AddTaskState> {
   AddTaskCubit(this._addTaskRepo) : super(AddTaskInitialState());
   final AddTaskRepo _addTaskRepo;
+  String image = '';
 
   Future addTask({required AddTaskModel addTaskModel}) async {
     emit(AddTaskLoadingState());
