@@ -72,9 +72,9 @@ class TaskWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           Transform.translate(
-            offset: const Offset(0, -21),
+            offset: const Offset(0, -22),
             child: const CustomPopupMenuButton(),
           ),
         ],

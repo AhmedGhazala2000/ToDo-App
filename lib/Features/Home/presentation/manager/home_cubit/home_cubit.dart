@@ -6,11 +6,10 @@ import 'package:todo_app/Features/Home/data/repos/home_repo.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._homeRepo) : super(HomeInitial());
+  HomeCubit(this._homeRepo) : super(HomeInitialState());
   final HomeRepo _homeRepo;
   int _currentPage = 1;
   bool hasMoreTasks = true;
-  int trigger = 1;
 
   Future fetchAllTasks() async {
     if (!hasMoreTasks) return;
