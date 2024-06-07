@@ -6,4 +6,6 @@ import '../models/task_model.dart';
 abstract class HomeRepo {
   Future<Either<Failures, List<TaskModel>>> fetchAllTasks(
       {required int pageNumber});
+
+  Future<Either<Failures, void>> deleteTask({required String taskId});
 }

@@ -52,6 +52,25 @@ class ApiServices {
     return response;
   }
 
+  //Delete Request
+  Future<Response> delete({
+    required String endPoint,
+    String? contentType,
+  }) async {
+    String token = await _getToken();
+    Response response = await _dio.delete(
+      '$_baseUrl/$endPoint',
+      options: Options(
+        headers: {
+          'Content-Type': contentType ?? 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    return response;
+  }
+
   //Get Token
   Future<String> _getToken() async {
     String? token = CachedNetwork.sharedPref.getString(kAccessToken);

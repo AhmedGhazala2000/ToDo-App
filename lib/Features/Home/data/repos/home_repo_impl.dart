@@ -13,6 +13,7 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl(this._apiServices);
 
+  // Get All Tasks
   @override
   Future<Either<Failures, List<TaskModel>>> fetchAllTasks(
       {required int pageNumber}) async {
@@ -26,6 +27,23 @@ class HomeRepoImpl implements HomeRepo {
         todos.add(TaskModel.fromJson(task));
       }
       return right(todos);
+    } on DioException catch (e) {
+      log(e.response?.data["message"].toString() ?? e.toString());
+      return left(ServerFailure.fromDioException(dioException: e));
+    } catch (e) {
+      log(e.toString());
+      return left(ServerFailure(errMessage: e.toString()));
+    }
+  }
+
+  // Delete Task
+  @override
+  Future<Either<Failures, void>> deleteTask({required String taskId}) async {
+    try {
+      await _apiServices.delete(
+        endPoint: '${EndPoints.todos}/$taskId',
+      );
+      return right(null);
     } on DioException catch (e) {
       log(e.response?.data["message"].toString() ?? e.toString());
       return left(ServerFailure.fromDioException(dioException: e));
