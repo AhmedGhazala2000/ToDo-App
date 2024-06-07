@@ -6,11 +6,12 @@ import 'package:todo_app/Features/Home/data/models/task_model.dart';
 import 'build_custom_list_tiles.dart';
 
 class TaskDetailsViewBody extends StatelessWidget {
-  const TaskDetailsViewBody({super.key});
+  const TaskDetailsViewBody({super.key, required this.task});
+
+  final TaskModel task;
 
   @override
   Widget build(BuildContext context) {
-    TaskModel task = ModalRoute.of(context)!.settings.arguments as TaskModel;
     return SingleChildScrollView(
       child: Column(
         children: [

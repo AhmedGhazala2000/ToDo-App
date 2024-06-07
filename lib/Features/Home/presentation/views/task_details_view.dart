@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../Core/function/build_custom_app_bar.dart';
+import 'package:todo_app/Core/function/build_custom_app_bar.dart';
+
+import '../../data/models/task_model.dart';
 import 'widgets/custom_popup_menu_button.dart';
 import 'widgets/task_details_view_body.dart';
 
@@ -10,17 +12,18 @@ class TaskDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TaskModel task = ModalRoute.of(context)!.settings.arguments as TaskModel;
     return SafeArea(
       child: Scaffold(
         appBar: buildCustomAppBar(
           context,
           title: 'Task Details',
-          actions: const Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CustomPopupMenuButton(),
+          actions: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: CustomPopupMenuButton(taskId: task.taskId!),
           ),
         ),
-        body: const TaskDetailsViewBody(),
+        body: TaskDetailsViewBody(task: task),
       ),
     );
   }
