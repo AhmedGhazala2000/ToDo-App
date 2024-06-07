@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/Core/function/get_status_text_color.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
@@ -51,7 +52,9 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
         CustomListTile(
           title: Text(
             widget.task.status!,
-            style: AppStyles.styleBold16.copyWith(color: kPrimaryColor),
+            style: AppStyles.styleBold16.copyWith(
+              color: getStatusTextColor(widget.task.status!),
+            ),
           ),
           trailing: CustomDropDownButton(
             onChanged: (value) {

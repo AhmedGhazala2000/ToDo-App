@@ -9,10 +9,11 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitialState());
   final HomeRepo _homeRepo;
   int _currentPage = 1;
-  bool hasMoreTasks = true;
+  bool? hasMoreTasks;
 
+  //Get All Tasks
   Future fetchAllTasks() async {
-    if (!hasMoreTasks) return;
+    if (hasMoreTasks == false) return;
 
     emit(
       _currentPage == 1 ? HomeLoadingState() : HomeLoadingPaginationState(),
@@ -26,14 +27,16 @@ class HomeCubit extends Cubit<HomeState> {
               ? HomeFailureState(failure.errMessage)
               : HomeFailurePaginationState(failure.errMessage),
         );
+        return failure.errMessage;
       },
       (success) {
-        if (success.isEmpty) {
+        if (success.isEmpty || success.length < 20) {
           hasMoreTasks = false;
         } else {
           _currentPage++;
         }
         emit(HomeSuccessState(tasks: success));
+        return success;
       },
     );
   }

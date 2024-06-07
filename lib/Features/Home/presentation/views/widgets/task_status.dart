@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Core/function/get_status_text_color.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
 class TaskStatus extends StatelessWidget {
@@ -16,7 +17,7 @@ class TaskStatus extends StatelessWidget {
       child: Text(
         status,
         style: AppStyles.styleMedium12.copyWith(
-          color: getTextColor(status),
+          color: getStatusTextColor(status),
         ),
       ),
     );
@@ -30,17 +31,6 @@ class TaskStatus extends StatelessWidget {
         return const Color(0xffF0ECFF);
       case 'finished':
         return const Color(0xffE3F2FF);
-    }
-  }
-
-  getTextColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'waiting':
-        return const Color(0xffFF7D53);
-      case 'inprogress':
-        return const Color(0xff5F33E1);
-      case 'finished':
-        return const Color(0xff0087FF);
     }
   }
 }

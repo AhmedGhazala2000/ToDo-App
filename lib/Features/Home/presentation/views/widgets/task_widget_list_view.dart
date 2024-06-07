@@ -14,9 +14,10 @@ class TaskWidgetListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool hasMoreTasks = BlocProvider.of<HomeCubit>(context).hasMoreTasks;
     return SliverList.builder(
-      itemCount: hasMoreTasks ? todos.length + 1 : todos.length,
+      itemCount: context.read<HomeCubit>().hasMoreTasks != false
+          ? todos.length + 1
+          : todos.length,
       itemBuilder: (context, index) {
         return index >= todos.length
             ? const Padding(

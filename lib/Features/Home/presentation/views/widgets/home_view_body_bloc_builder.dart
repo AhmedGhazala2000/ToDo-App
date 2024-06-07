@@ -70,7 +70,7 @@ class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
     final isNearEnd = currentPosition >= .75 * maxScrollLength;
     final homeCubit = BlocProvider.of<HomeCubit>(context);
 
-    if (isNearEnd && !isLoading && homeCubit.hasMoreTasks) {
+    if (isNearEnd && !isLoading && homeCubit.hasMoreTasks != false) {
       isLoading = true;
       await BlocProvider.of<HomeCubit>(context).fetchAllTasks();
       isLoading = false;
