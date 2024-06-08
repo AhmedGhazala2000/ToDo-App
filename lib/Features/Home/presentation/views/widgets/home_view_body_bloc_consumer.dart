@@ -7,15 +7,17 @@ import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubi
 
 import 'my_tasks_section.dart';
 
-class HomeViewBodyBlocBuilder extends StatefulWidget {
-  const HomeViewBodyBlocBuilder({super.key});
+class HomeViewBodyBlocConsumer extends StatefulWidget {
+  const HomeViewBodyBlocConsumer({super.key, required this.status});
+
+  final String status;
 
   @override
-  State<HomeViewBodyBlocBuilder> createState() =>
-      _HomeViewBodyBlocBuilderState();
+  State<HomeViewBodyBlocConsumer> createState() =>
+      _HomeViewBodyBlocConsumerState();
 }
 
-class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
+class _HomeViewBodyBlocConsumerState extends State<HomeViewBodyBlocConsumer> {
   late final ScrollController _scrollController;
   bool isLoading = false;
   List<TaskModel> todos = [];
@@ -72,7 +74,8 @@ class _HomeViewBodyBlocBuilderState extends State<HomeViewBodyBlocBuilder> {
 
     if (isNearEnd && !isLoading && homeCubit.hasMoreTasks != false) {
       isLoading = true;
-      await BlocProvider.of<HomeCubit>(context).fetchAllTasks();
+      await BlocProvider.of<HomeCubit>(context)
+          .fetchAllTasks(status: widget.status);
       isLoading = false;
     }
   }

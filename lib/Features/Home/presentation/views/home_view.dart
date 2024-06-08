@@ -16,11 +16,13 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = ModalRoute.of(context)?.settings.arguments ?? 'All';
+
     return BlocProvider(
       create: (context) => HomeCubit(getIt.get<HomeRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          body: const HomeViewBody(),
+          body: HomeViewBody(status: status.toString()),
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 24, right: 10),
             child: Column(

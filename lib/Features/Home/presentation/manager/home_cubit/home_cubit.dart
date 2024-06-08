@@ -7,36 +7,41 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitialState());
+
   final HomeRepo _homeRepo;
   int _currentPage = 1;
   bool? hasMoreTasks;
 
   //Get All Tasks
-  Future fetchAllTasks() async {
+  Future<void> fetchAllTasks({required String status}) async {
     if (hasMoreTasks == false) return;
 
-    emit(
-      _currentPage == 1 ? HomeLoadingState() : HomeLoadingPaginationState(),
-    );
+    emit(_currentPage == 1 ? HomeLoadingState() : HomeLoadingPaginationState());
 
     final result = await _homeRepo.fetchAllTasks(pageNumber: _currentPage);
+
     result.fold(
       (failure) {
-        emit(
-          _currentPage == 1
-              ? HomeFailureState(failure.errMessage)
-              : HomeFailurePaginationState(failure.errMessage),
-        );
-        return failure.errMessage;
+        emit(_currentPage == 1
+            ? HomeFailureState(failure.errMessage)
+            : HomeFailurePaginationState(failure.errMessage));
       },
       (success) {
+        //Filter tasks by status
+        if (status.toLowerCase() != 'all') {
+          final filteredTasks = success
+              .where(
+                  (task) => task.status?.toLowerCase() == status.toLowerCase())
+              .toList();
+          success = filteredTasks;
+        }
+        //Check if there are more tasks for pagination
         if (success.isEmpty || success.length < 20) {
           hasMoreTasks = false;
         } else {
           _currentPage++;
         }
         emit(HomeSuccessState(tasks: success));
-        return success;
       },
     );
   }

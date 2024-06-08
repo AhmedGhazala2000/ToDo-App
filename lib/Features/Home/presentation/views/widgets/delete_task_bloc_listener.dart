@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
 
 import '../../manager/delete_task_cubit/delete_task_cubit.dart';
 import '../home_view.dart';
@@ -21,6 +23,7 @@ class DeleteTaskBlocListener extends StatelessWidget {
             context,
             HomeView.id,
             (route) => false,
+            arguments: CachedNetwork.sharedPref.getString(kStatus),
           );
         } else if (state is DeleteTaskFailureState) {
           showSnackBar(

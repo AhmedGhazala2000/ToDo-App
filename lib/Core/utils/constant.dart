@@ -17,6 +17,8 @@ const Color kFifthColor = Color(0xffBABABA);
 const String kIsFirstTime = 'isFirstTime';
 const String kAccessToken = 'accessToken';
 const String kRefreshToken = 'refreshToken';
+const String kCurrentSelectedIndex = 'currentSelectedIndex';
+const String kStatus = 'status';
 
 abstract class EndPoints {
   static const String register = 'auth/register';

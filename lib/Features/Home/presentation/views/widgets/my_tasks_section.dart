@@ -32,7 +32,20 @@ class MyTasksSection extends StatelessWidget {
             child: SelectTasksItemsListView(),
           ),
         ),
-        TaskWidgetListView(todos: todos),
+        if (todos.isNotEmpty)
+          TaskWidgetListView(todos: todos)
+        else
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Center(
+                child: Text(
+                  'No tasks yet',
+                  style: AppStyles.styleBold16,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
