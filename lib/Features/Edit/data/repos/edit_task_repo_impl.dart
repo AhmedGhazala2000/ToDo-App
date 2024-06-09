@@ -18,7 +18,8 @@ class EditTaskRepoImpl implements EditTaskRepo {
   Future<Either<Failures, void>> editTask(
       {required TaskRequestModel editTaskModel, required String taskId}) async {
     try {
-      await _apiServices.post(
+      await _apiServices.request(
+        method: 'PUT',
         endPoint: '${EndPoints.todos}/$taskId',
         bodyData: editTaskModel.toJson(),
       );

@@ -17,7 +17,8 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failures, List<TaskModel>>> fetchAllTasks(
       {required int pageNumber}) async {
     try {
-      Response response = await _apiServices.get(
+      Response response = await _apiServices.request(
+        method: 'GET',
         endPoint: '${EndPoints.todos}?page=$pageNumber',
       );
       if (response.data.isEmpty) return right([]);

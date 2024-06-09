@@ -12,77 +12,20 @@ class ApiServices {
 
   ApiServices(this._dio);
 
-  //Post Request
-  Future<Response> post({
+  //Request Methods (POST, GET, PUT, DELETE)
+  Future<Response> request({
+    required String method,
     required String endPoint,
     Object? bodyData,
-    String? contentType,
+    String contentType = 'application/json',
   }) async {
     String token = await _getToken();
-    Response response = await _dio.post(
+    Response response = await _dio.request(
       '$_baseUrl/$endPoint',
       options: Options(
+        method: method,
         headers: {
-          'Content-Type': contentType ?? 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      ),
-      data: bodyData,
-    );
-
-    return response;
-  }
-
-  //Get Request
-  Future<Response> get({
-    required String endPoint,
-    String? contentType,
-  }) async {
-    String token = await _getToken();
-    Response response = await _dio.get(
-      '$_baseUrl/$endPoint',
-      options: Options(
-        headers: {
-          'Content-Type': contentType ?? 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      ),
-    );
-
-    return response;
-  }
-
-  //Delete Request
-  Future<Response> delete({
-    required String endPoint,
-    String? contentType,
-  }) async {
-    String token = await _getToken();
-    Response response = await _dio.delete(
-      '$_baseUrl/$endPoint',
-      options: Options(
-        headers: {
-          'Content-Type': contentType ?? 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      ),
-    );
-
-    return response;
-  }
-
-  //Edit Request
-  Future<Response> put({
-    required String endPoint,
-    Object? bodyData,
-    String? contentType,
-  }) async {
-    String token = await _getToken();
-    Response response = await _dio.put(
-      '$_baseUrl/$endPoint',
-      options: Options(
-        headers: {
-          'Content-Type': contentType ?? 'application/json',
+          'Content-Type': contentType,
           'Authorization': 'Bearer $token',
         },
       ),
@@ -94,11 +37,11 @@ class ApiServices {
 
   //Get Token
   Future<String> _getToken() async {
-    String? token = CachedNetwork.sharedPref.getString(kAccessToken);
+    final token = CachedNetwork.sharedPref.getString(kAccessToken);
     if (token == null) return '';
 
     if (JwtDecoder.isExpired(token)) {
-      token = await _refreshToken();
+      return await _refreshToken();
     }
     return token;
   }
@@ -106,11 +49,11 @@ class ApiServices {
   //Refresh Token
   Future<String> _refreshToken() async {
     try {
-      String refreshToken = CachedNetwork.sharedPref.getString(kRefreshToken)!;
-      Response response = await _dio.get(
+      final refreshToken = CachedNetwork.sharedPref.getString(kRefreshToken)!;
+      final response = await _dio.get(
         '$_baseUrl/${EndPoints.refreshToken}?token=$refreshToken',
       );
-      String newToken = response.data['access_token'];
+      final newToken = response.data['access_token'];
       CachedNetwork.sharedPref.setString(kAccessToken, newToken);
       return newToken;
     } on DioException catch (e) {

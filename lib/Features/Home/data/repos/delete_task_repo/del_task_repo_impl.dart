@@ -16,7 +16,8 @@ class DeleteTaskRepoImpl implements DeleteTaskRepo {
   @override
   Future<Either<Failures, void>> deleteTask({required String taskId}) async {
     try {
-      await _apiServices.delete(
+      await _apiServices.request(
+        method: 'DELETE',
         endPoint: '${EndPoints.todos}/$taskId',
       );
       return right(null);

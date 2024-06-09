@@ -20,7 +20,8 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failures, void>> register(RegisterRequestModel model) async {
     try {
-      await _apiService.post(
+      await _apiService.request(
+        method: 'POST',
         endPoint: EndPoints.register,
         bodyData: model.toJson(),
       );
@@ -39,7 +40,8 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failures, AuthResponseModel>> login(
       LoginRequestModel model) async {
     try {
-      var response = await _apiService.post(
+      var response = await _apiService.request(
+        method: 'POST',
         endPoint: EndPoints.login,
         bodyData: model.toJson(),
       );
@@ -60,7 +62,8 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failures, void>> logout() async {
     try {
-      await _apiService.post(
+      await _apiService.request(
+        method: 'POST',
         endPoint: EndPoints.logout,
       );
       CachedNetwork.sharedPref.remove(kAccessToken);

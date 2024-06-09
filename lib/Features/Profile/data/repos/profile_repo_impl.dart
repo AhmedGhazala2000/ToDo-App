@@ -17,7 +17,8 @@ class ProfileRepoImpl implements ProfileRepo {
   @override
   Future<Either<Failures, UserModel>> getProfile() async {
     try {
-      Response response = await _apiServices.get(
+      Response response = await _apiServices.request(
+        method: 'GET',
         endPoint: EndPoints.profile,
       );
       var userData = UserModel.fromJson(response.data);

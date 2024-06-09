@@ -18,7 +18,8 @@ class AddTaskRepoImpl implements AddTaskRepo {
   Future<Either<Failures, void>> addTask(
       {required TaskRequestModel addTaskModel}) async {
     try {
-      await _apiServices.post(
+      await _apiServices.request(
+        method: 'POST',
         endPoint: EndPoints.todos,
         bodyData: addTaskModel.toJson(),
       );
