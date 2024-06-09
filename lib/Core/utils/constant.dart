@@ -4,6 +4,7 @@ import 'package:todo_app/Features/Profile/presentation/views/profile_view.dart';
 import '../../Features/Add/presentation/views/add_task_view.dart';
 import '../../Features/Auth/presentation/views/login_view.dart';
 import '../../Features/Auth/presentation/views/register_view.dart';
+import '../../Features/Edit/presentation/views/edit_task_view.dart';
 import '../../Features/Home/presentation/views/home_view.dart';
 import '../../Features/Home/presentation/views/task_details_view.dart';
 import '../../Features/Splash/presentation/views/splash_view.dart';
@@ -39,5 +40,6 @@ Map<String, WidgetBuilder> appRoutes() {
     ProfileView.id: (context) => const ProfileView(),
     TaskDetailsView.id: (context) => const TaskDetailsView(),
     AddTaskView.id: (context) => const AddTaskView(),
+    EditTaskView.id: (context) => const EditTaskView(),
   };
 }
