@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:todo_app/Core/errors/failures.dart';
-import 'package:todo_app/Core/models/task_request_model.dart';
 import 'package:todo_app/Core/utils/api_services.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 
+import '../models/edit_task_model.dart';
 import 'edit_task_repo.dart';
 
 class EditTaskRepoImpl implements EditTaskRepo {
@@ -16,7 +16,7 @@ class EditTaskRepoImpl implements EditTaskRepo {
 
   @override
   Future<Either<Failures, void>> editTask(
-      {required TaskRequestModel editTaskModel, required String taskId}) async {
+      {required EditTaskModel editTaskModel, required String taskId}) async {
     try {
       await _apiServices.request(
         method: 'PUT',
