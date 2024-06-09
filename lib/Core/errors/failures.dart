@@ -38,7 +38,7 @@ class ServerFailure extends Failures {
         );
       case DioExceptionType.connectionError:
         return ServerFailure(
-          errMessage: 'No Internet Connection',
+          errMessage: 'No internet connection, please try again!',
         );
       case DioExceptionType.unknown:
         return ServerFailure(

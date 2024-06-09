@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/service_locator.dart';
 import 'package:todo_app/Features/Add/presentation/views/add_task_view.dart';
@@ -9,10 +10,23 @@ import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubi
 
 import 'widgets/home_view_body.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   static const String id = 'HomeView';
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final RefreshController _controller = RefreshController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +36,11 @@ class HomeView extends StatelessWidget {
       create: (context) => HomeCubit(getIt.get<HomeRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          body: HomeViewBody(status: status.toString()),
+          body: SmartRefresher(
+            controller: _controller,
+            onRefresh: () => _onRefresh(context, status.toString()),
+            child: HomeViewBody(status: status.toString()),
+          ),
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 24, right: 10),
             child: Column(
@@ -50,5 +68,19 @@ class HomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _onRefresh(BuildContext context, String status) async {
+    await Future.delayed(const Duration(seconds: 1)).then(
+      (_) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          HomeView.id,
+          (route) => false,
+          arguments: status,
+        );
+      },
+    );
+    _controller.refreshCompleted();
   }
 }
