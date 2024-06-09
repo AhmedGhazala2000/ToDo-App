@@ -13,7 +13,7 @@ class ApiServices {
   ApiServices(this._dio);
 
   //Post Request
-  Future post({
+  Future<Response> post({
     required String endPoint,
     Object? bodyData,
     String? contentType,
@@ -66,6 +66,27 @@ class ApiServices {
           'Authorization': 'Bearer $token',
         },
       ),
+    );
+
+    return response;
+  }
+
+  //Edit Request
+  Future<Response> put({
+    required String endPoint,
+    Object? bodyData,
+    String? contentType,
+  }) async {
+    String token = await _getToken();
+    Response response = await _dio.put(
+      '$_baseUrl/$endPoint',
+      options: Options(
+        headers: {
+          'Content-Type': contentType ?? 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: bodyData,
     );
 
     return response;
