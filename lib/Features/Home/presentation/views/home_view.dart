@@ -5,7 +5,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/service_locator.dart';
 import 'package:todo_app/Features/Add/presentation/views/add_task_view.dart';
-import 'package:todo_app/Features/Home/data/repos/home_repo_impl.dart';
+import 'package:todo_app/Features/Home/data/repos/home_repo/home_repo_impl.dart';
 import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubit.dart';
 
 import 'widgets/home_view_body.dart';
