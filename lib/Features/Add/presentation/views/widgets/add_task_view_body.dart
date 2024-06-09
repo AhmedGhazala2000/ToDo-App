@@ -5,7 +5,7 @@ import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_text_form_field.dart';
 import 'package:todo_app/Core/widgets/show_date_piker.dart';
 
-import '../../../data/models/add_task_model.dart';
+import '../../../../../Core/models/task_request_model.dart';
 import '../../manager/add_task_cubit/add_task_cubit.dart';
 import 'add_image_widget.dart';
 import 'add_task_button_bloc_consumer.dart';
@@ -98,7 +98,7 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    AddTaskModel model = AddTaskModel(
+                    TaskRequestModel model = TaskRequestModel(
                       image: context.read<AddTaskCubit>().image,
                       title: title!,
                       desc: desc!,
