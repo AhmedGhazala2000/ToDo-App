@@ -11,53 +11,26 @@ import 'api_services.dart';
 
 final getIt = GetIt.instance;
 
-void setupServiceLocator() {
+void setupDependencyInjection() {
   //Api Services Instance
-  getIt.registerSingleton<ApiServices>(
-    ApiServices(
-      Dio(),
-    ),
-  );
+  getIt.registerSingleton<ApiServices>(ApiServices(Dio()));
+  final apiServices = getIt.get<ApiServices>();
 
   //Auth Repo Instance
-  getIt.registerSingleton<AuthRepoImpl>(
-    AuthRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(apiServices));
 
   //Profile Repo Instance
-  getIt.registerSingleton<ProfileRepoImpl>(
-    ProfileRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<ProfileRepoImpl>(ProfileRepoImpl(apiServices));
 
   //Home Repo Instance
-  getIt.registerSingleton<HomeRepoImpl>(
-    HomeRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<HomeRepoImpl>(HomeRepoImpl(apiServices));
 
   //Add Task Repo Instance
-  getIt.registerSingleton<AddTaskRepoImpl>(
-    AddTaskRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<AddTaskRepoImpl>(AddTaskRepoImpl(apiServices));
 
   //Delete Task Repo Instance
-  getIt.registerSingleton<DeleteTaskRepoImpl>(
-    DeleteTaskRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<DeleteTaskRepoImpl>(DeleteTaskRepoImpl(apiServices));
 
   //Edit Task Repo Instance
-  getIt.registerSingleton<EditTaskRepoImpl>(
-    EditTaskRepoImpl(
-      getIt<ApiServices>(),
-    ),
-  );
+  getIt.registerSingleton<EditTaskRepoImpl>(EditTaskRepoImpl(apiServices));
 }

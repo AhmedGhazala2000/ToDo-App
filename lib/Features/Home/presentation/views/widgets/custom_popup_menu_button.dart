@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/Core/utils/service_locator.dart';
+import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/data/repos/delete_task_repo/del_task_repo_impl.dart';
 import 'package:todo_app/Features/Home/presentation/manager/delete_task_cubit/delete_task_cubit.dart';

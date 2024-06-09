@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/build_custom_app_bar.dart';
-import 'package:todo_app/Core/utils/service_locator.dart';
+import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Features/Add/data/repos/add_task_repo_impl.dart';
 import 'package:todo_app/Features/Add/presentation/manager/add_task_cubit/add_task_cubit.dart';
 

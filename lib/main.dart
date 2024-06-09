@@ -4,7 +4,7 @@ import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Features/Splash/presentation/views/splash_view.dart';
 
 import 'Core/utils/constant.dart';
-import 'Core/utils/service_locator.dart';
+import 'Core/utils/dependency_injection.dart';
 import 'Core/utils/simple_bloc_observers.dart';
 import 'Features/Auth/data/repos/auth_repo_impl.dart';
 import 'Features/Auth/presentation/manager/auth_cubit/auth_cubit.dart';
@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObservers();
   await CachedNetwork.init();
-  setupServiceLocator();
+  setupDependencyInjection();
   runApp(const ToDoApp());
 }
 
