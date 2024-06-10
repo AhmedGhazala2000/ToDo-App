@@ -20,7 +20,7 @@ class TaskDetailsView extends StatelessWidget {
           title: 'Task Details',
           actions: Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: CustomPopupMenuButton(taskId: task.taskId!),
+            child: CustomPopupMenuButton(task: task),
           ),
         ),
         body: TaskDetailsViewBody(task: task),

@@ -41,7 +41,7 @@ class AddTaskButtonBlocConsumer extends StatelessWidget {
           child: state is AddTaskLoadingState
               ? const CustomCircularIndicator()
               : Text(
-                  'Add task',
+                  'Add Task',
                   style: AppStyles.styleBold14.copyWith(fontSize: 19),
                 ),
         );

@@ -121,6 +121,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                 CustomTextFormField(
                   hintText: 'Password...',
                   keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
                   obscureText: isVisibility,
                   suffix: IconButton(
                     icon: Icon(

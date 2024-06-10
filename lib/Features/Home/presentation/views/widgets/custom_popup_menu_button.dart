@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Edit/presentation/views/edit_task_view.dart';
+import 'package:todo_app/Features/Home/data/models/task_model.dart';
 import 'package:todo_app/Features/Home/data/repos/delete_task_repo/del_task_repo_impl.dart';
 import 'package:todo_app/Features/Home/presentation/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:todo_app/Features/Home/presentation/views/widgets/delete_task_bloc_listener.dart';
@@ -11,9 +12,9 @@ import 'custom_indented_divider.dart';
 import 'show_delete_dialog.dart';
 
 class CustomPopupMenuButton extends StatelessWidget {
-  const CustomPopupMenuButton({super.key, required this.taskId});
+  const CustomPopupMenuButton({super.key, required this.task});
 
-  final String taskId;
+  final TaskModel task;
   final EdgeInsets? customPadding =
       const EdgeInsets.symmetric(vertical: 12, horizontal: 16);
 
@@ -36,6 +37,7 @@ class CustomPopupMenuButton extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   EditTaskView.id,
+                  arguments: task,
                 );
               },
               child: Text(
@@ -51,7 +53,7 @@ class CustomPopupMenuButton extends StatelessWidget {
             PopupMenuItem<String>(
               padding: customPadding,
               onTap: () {
-                showDeleteDialog(context, taskId);
+                showDeleteDialog(context, task.taskId!);
               },
               child: Text(
                 'Delete',

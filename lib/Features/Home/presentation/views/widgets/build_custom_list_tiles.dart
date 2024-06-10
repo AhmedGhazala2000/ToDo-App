@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_app/Core/function/get_status_text_color.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
-import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
+import 'package:todo_app/Core/widgets/custom_status_list_tile.dart';
 import 'package:todo_app/Core/widgets/show_date_piker.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
 
@@ -49,22 +46,13 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
           ),
         ),
         const SizedBox(height: 8),
-        CustomListTile(
-          title: Text(
-            widget.task.status!,
-            style: AppStyles.styleBold16.copyWith(
-              color: getStatusTextColor(widget.task.status!),
-            ),
-          ),
-          trailing: CustomDropDownButton(
-            onChanged: (value) {
-              setState(() {
-                widget.task.status = value!;
-              });
-            },
-            items: const ['Waiting', 'Inprogress', 'Finished'],
-            icon: SvgPicture.asset('assets/images/arrow-down.svg'),
-          ),
+        CustomStatusListTile(
+          status: widget.task.status!,
+          onChanged: (value) {
+            setState(() {
+              widget.task.status = value!;
+            });
+          },
         ),
         const SizedBox(height: 8),
         CustomPriorityListTile(

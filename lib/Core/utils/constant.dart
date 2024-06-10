@@ -10,17 +10,20 @@ import '../../Features/Home/presentation/views/task_details_view.dart';
 import '../../Features/Splash/presentation/views/splash_view.dart';
 import '../../Features/Splash/presentation/views/start_view.dart';
 
+// Colors
 const Color kPrimaryColor = Color(0xff5F33E1);
 const Color kSecondColor = Color(0xff24252C);
 const Color kThirdColor = Color(0xffF0ECFF);
 const Color kFourthColor = Color(0xff7F7F7F);
 const Color kFifthColor = Color(0xffBABABA);
+//String
 const String kIsFirstTime = 'isFirstTime';
 const String kAccessToken = 'accessToken';
 const String kRefreshToken = 'refreshToken';
 const String kCurrentSelectedIndex = 'currentSelectedIndex';
 const String kStatus = 'status';
 
+// End Points
 abstract class EndPoints {
   static const String register = 'auth/register';
   static const String login = 'auth/login';
@@ -30,6 +33,7 @@ abstract class EndPoints {
   static const String todos = 'todos';
 }
 
+// Routes
 Map<String, WidgetBuilder> appRoutes() {
   return {
     SplashView.id: (context) => const SplashView(),
@@ -42,4 +46,28 @@ Map<String, WidgetBuilder> appRoutes() {
     AddTaskView.id: (context) => const AddTaskView(),
     EditTaskView.id: (context) => const EditTaskView(),
   };
+}
+
+// Get Priority Color
+getPriorityColor(String priority) {
+  switch (priority.toLowerCase()) {
+    case 'low':
+      return const Color(0xff0087FF);
+    case 'medium':
+      return const Color(0xff5F33E1);
+    case 'high':
+      return const Color(0xffFF7D53);
+  }
+}
+
+// Get Status Text Color
+getStatusTextColor(String status) {
+  switch (status.toLowerCase()) {
+    case 'waiting':
+      return const Color(0xffFF7D53);
+    case 'inprogress':
+      return const Color(0xff5F33E1);
+    case 'finished':
+      return const Color(0xff0087FF);
+  }
 }
