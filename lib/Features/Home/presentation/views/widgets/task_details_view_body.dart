@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
@@ -50,9 +51,9 @@ class TaskDetailsViewBody extends StatelessWidget {
               children: [
                 BuildCustomListTiles(task: task),
                 const SizedBox(height: 16),
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.asset('assets/images/barcode_img.png'),
+                QrImageView(
+                  padding: const EdgeInsets.all(20),
+                  data: task.taskId!,
                 ),
                 const SizedBox(height: 30)
               ],
