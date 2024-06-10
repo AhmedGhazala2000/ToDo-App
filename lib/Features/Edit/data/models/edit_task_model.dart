@@ -1,5 +1,5 @@
 class EditTaskModel {
-  final String? image, title, desc, priority, status, userId;
+  final String image, title, desc, priority, status, userId;
 
   const EditTaskModel({
     required this.image,

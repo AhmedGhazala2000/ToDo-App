@@ -15,7 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     this.experienceLevel,
     this.isDueDate = false,
     this.onSaved,
-    this.onSubmitted,
+    this.onChanged,
     this.textInputAction = TextInputAction.next,
   });
 
@@ -32,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final TextInputAction? textInputAction;
   final void Function(String?)? onSaved;
-  final void Function(String)? onSubmitted;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class CustomTextFormField extends StatelessWidget {
       },
       readOnly: readOnly!,
       onSaved: onSaved,
-      onFieldSubmitted: onSubmitted,
+      onChanged: onChanged,
       obscureText: obscureText!,
       keyboardType: keyboardType,
       maxLines: maxLines,

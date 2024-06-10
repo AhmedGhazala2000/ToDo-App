@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:todo_app/Core/utils/styles.dart';
-import 'package:todo_app/Core/widgets/custom_buttons.dart';
+import 'package:todo_app/Core/widgets/build_custom_widget.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_status_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_text_form_field.dart';
 import 'package:todo_app/Core/widgets/show_image_picker.dart';
-import 'package:todo_app/Features/Add/presentation/views/widgets/build_custom_widget.dart';
+import 'package:todo_app/Features/Edit/data/models/edit_task_model.dart';
+import 'package:todo_app/Features/Edit/presentation/manager/edit_task_cubit/edit_task_cubit.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
+
+import 'edit_task_button_bloc_consumer.dart';
 
 class EditTaskViewBody extends StatefulWidget {
   const EditTaskViewBody({super.key});
@@ -31,15 +34,21 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
             const SizedBox(height: 24),
             ShowImagePicker(
               text: 'Edit',
-              onCameraTap: () => _getImage(ImageSource.camera),
-              onGalleryTap: () => _getImage(ImageSource.gallery),
+              onCameraTap: () {
+                _getImage(ImageSource.camera);
+                Navigator.pop(context);
+              },
+              onGalleryTap: () {
+                _getImage(ImageSource.gallery);
+                Navigator.pop(context);
+              },
             ),
             BuildCustomWidget(
               text: 'Task title',
               widget: CustomTextFormField(
                 hintText: task.title,
                 keyboardType: TextInputType.text,
-                onSubmitted: (data) {
+                onChanged: (data) {
                   title = data;
                 },
               ),
@@ -51,7 +60,7 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 maxLines: 7,
-                onSubmitted: (data) {
+                onChanged: (data) {
                   desc = data;
                 },
               ),
@@ -79,12 +88,21 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
               ),
             ),
             const SizedBox(height: 30),
-            CustomButton(
-              onPressed: () {},
-              child: Text(
-                'Save',
-                style: AppStyles.styleBold14.copyWith(fontSize: 19),
-              ),
+            EditTaskButtonBlocConsumer(
+              onPressed: () {
+                final EditTaskModel model = EditTaskModel(
+                  title: title ?? task.title!,
+                  desc: desc ?? task.desc!,
+                  priority: priority?.toLowerCase() ?? task.priority!,
+                  status: status?.toLowerCase() ?? task.status!,
+                  image: image ?? task.image!.path,
+                  userId: task.userId!,
+                );
+                BlocProvider.of<EditTaskCubit>(context).editTask(
+                  editTaskModel: model,
+                  taskId: task.taskId!,
+                );
+              },
             ),
             const SizedBox(height: 50),
           ],
@@ -93,6 +111,7 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
     );
   }
 
+  // get image from gallery or camera
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
     if (pickedFile != null) {
