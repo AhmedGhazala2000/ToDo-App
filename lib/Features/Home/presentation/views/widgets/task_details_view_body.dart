@@ -1,66 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:todo_app/Core/utils/constant.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/utils/styles.dart';
-import 'package:todo_app/Features/Home/data/models/task_model.dart';
+import 'package:todo_app/Features/Home/presentation/views/widgets/display_task_details.dart';
 
-import 'build_custom_list_tiles.dart';
+import '../../manager/task_details_cubit/task_details_cubit.dart';
 
-class TaskDetailsViewBody extends StatelessWidget {
-  const TaskDetailsViewBody({super.key, required this.task});
+class TaskDetailsViewBody extends StatefulWidget {
+  const TaskDetailsViewBody({super.key, required this.taskId});
 
-  final TaskModel task;
+  final String taskId;
+
+  @override
+  State<TaskDetailsViewBody> createState() => _TaskDetailsViewBodyState();
+}
+
+class _TaskDetailsViewBodyState extends State<TaskDetailsViewBody> {
+  @override
+  void initState() {
+    _triggerTaskDetailsCubit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 375),
-            child: AspectRatio(
-              aspectRatio: 1.5 / 1,
-              child: Image.file(
-                task.image!,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  task.title!,
-                  style: AppStyles.styleBold24,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  task.desc!,
-                  style: TextStyle(
-                    height: 1.4,
-                    color: kSecondColor.withOpacity(.6),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.5),
-            child: Column(
-              children: [
-                BuildCustomListTiles(task: task),
-                const SizedBox(height: 16),
-                QrImageView(
-                  padding: const EdgeInsets.all(20),
-                  data: task.taskId!,
-                ),
-                const SizedBox(height: 30)
-              ],
-            ),
-          )
-        ],
-      ),
+    return BlocBuilder<TaskDetailsCubit, TaskDetailsState>(
+      builder: (context, state) {
+        if (state is TaskDetailsSuccessState) {
+          return DisplayTaskDetails(task: state.task);
+        } else if (state is TaskDetailsFailureState) {
+          return Center(
+            child: Text(state.errMessage, style: AppStyles.styleBold16),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
+  }
+
+  Future<void> _triggerTaskDetailsCubit() async {
+    await BlocProvider.of<TaskDetailsCubit>(context)
+        .getTask(taskId: widget.taskId);
   }
 }

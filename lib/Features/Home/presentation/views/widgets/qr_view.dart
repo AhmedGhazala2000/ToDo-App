@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
+import '../task_details_view.dart';
 import 'qr_control_buttons.dart';
 
 class QrView extends StatefulWidget {
   const QrView({Key? key}) : super(key: key);
+  static const String id = 'QrView';
 
   @override
   State<QrView> createState() => _QrViewState();
@@ -15,8 +17,7 @@ class QrView extends StatefulWidget {
 
 class _QrViewState extends State<QrView> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  Barcode? result;
-  QRViewController? controller;
+  QRViewController? _controller;
   bool isFlashOn = false, isCameraFront = false, isCameraPaused = false;
 
   /* In order to get hot reload to work we need to pause the camera if the platform
@@ -25,15 +26,15 @@ class _QrViewState extends State<QrView> {
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-      controller!.pauseCamera();
+      _controller!.pauseCamera();
     } else if (Platform.isIOS) {
-      controller!.resumeCamera();
+      _controller!.resumeCamera();
     }
   }
 
   @override
   void dispose() {
-    controller?.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -77,8 +78,8 @@ class _QrViewState extends State<QrView> {
               isCameraPaused: isCameraPaused,
               onPausePressed: () {
                 isCameraPaused
-                    ? controller?.resumeCamera()
-                    : controller?.pauseCamera();
+                    ? _controller?.resumeCamera()
+                    : _controller?.pauseCamera();
                 setState(() {
                   isCameraPaused = !isCameraPaused;
                 });
@@ -89,7 +90,7 @@ class _QrViewState extends State<QrView> {
                   setState(() {
                     isCameraFront = !isCameraFront;
                   });
-                  controller?.flipCamera();
+                  _controller?.flipCamera();
                 }
               },
               isFlashOn: isFlashOn,
@@ -97,7 +98,7 @@ class _QrViewState extends State<QrView> {
                 setState(() {
                   isFlashOn = !isFlashOn;
                 });
-                controller?.toggleFlash();
+                _controller?.toggleFlash();
               },
             ),
           ),
@@ -107,12 +108,14 @@ class _QrViewState extends State<QrView> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
+    _controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null) {
-        setState(() {
-          result = scanData;
-        });
+        Navigator.pushReplacementNamed(
+          context,
+          TaskDetailsView.id,
+          arguments: scanData.code,
+        );
       }
     });
   }

@@ -29,7 +29,7 @@ class TaskWidgetListView extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     TaskDetailsView.id,
-                    arguments: todos[index],
+                    arguments: todos[index].taskId,
                   );
                 },
                 child: TaskWidget(task: todos[index]),

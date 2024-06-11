@@ -18,7 +18,7 @@ class ProfileView extends StatelessWidget {
       create: (context) => ProfileCubit(getIt.get<ProfileRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          appBar: buildCustomAppBar(context, title: 'Profile'),
+          appBar: buildAppBar(context, title: 'Profile'),
           body: const ProfileViewBody(),
         ),
       ),

@@ -15,7 +15,9 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
     final result = await _taskDetailsRepo.getTaskDetails(taskId: taskId);
     result.fold(
       (failure) => emit(TaskDetailsFailureState(failure.errMessage)),
-      (success) => emit(TaskDetailsSuccessState(task: success)),
+      (success) {
+        emit(TaskDetailsSuccessState(task: success));
+      },
     );
   }
 }

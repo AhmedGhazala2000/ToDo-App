@@ -45,7 +45,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   }
 
   //trigger home cubit
-  void _triggerHomeCubit() async {
-    BlocProvider.of<HomeCubit>(context).fetchAllTasks(status: widget.status);
+  Future<void> _triggerHomeCubit() async {
+    await BlocProvider.of<HomeCubit>(context)
+        .fetchAllTasks(status: widget.status);
   }
 }

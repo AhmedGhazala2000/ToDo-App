@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/Core/function/build_custom_app_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/utils/dependency_injection.dart';
+import 'package:todo_app/Features/Home/data/repos/task_details_repo/task_details_repo_impl.dart';
+import 'package:todo_app/Features/Home/presentation/manager/task_details_cubit/task_details_cubit.dart';
 
-import '../../data/models/task_model.dart';
-import 'widgets/custom_popup_menu_button.dart';
 import 'widgets/task_details_view_body.dart';
 
 class TaskDetailsView extends StatelessWidget {
@@ -12,18 +13,13 @@ class TaskDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TaskModel task = ModalRoute.of(context)!.settings.arguments as TaskModel;
-    return SafeArea(
-      child: Scaffold(
-        appBar: buildCustomAppBar(
-          context,
-          title: 'Task Details',
-          actions: Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: CustomPopupMenuButton(task: task),
-          ),
+    final taskId = ModalRoute.of(context)!.settings.arguments;
+    return BlocProvider(
+      create: (context) => TaskDetailsCubit(getIt.get<TaskDetailsRepoImpl>()),
+      child: SafeArea(
+        child: Scaffold(
+          body: TaskDetailsViewBody(taskId: taskId.toString()),
         ),
-        body: TaskDetailsViewBody(task: task),
       ),
     );
   }

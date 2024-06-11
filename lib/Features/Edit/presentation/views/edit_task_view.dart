@@ -18,7 +18,7 @@ class EditTaskView extends StatelessWidget {
       create: (context) => EditTaskCubit(getIt.get<EditTaskRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          appBar: buildCustomAppBar(context, title: 'Edit the Task'),
+          appBar: buildAppBar(context, title: 'Edit the Task'),
           body: const EditTaskViewBody(),
         ),
       ),

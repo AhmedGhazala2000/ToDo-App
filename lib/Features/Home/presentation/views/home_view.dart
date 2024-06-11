@@ -53,11 +53,9 @@ class _HomeViewState extends State<HomeView> {
                   backgroundColor: kThirdColor,
                   shape: const CircleBorder(),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const QrView(),
-                      ),
+                      QrView.id,
                     );
                   },
                   child: SvgPicture.asset('assets/images/barcode_icon.svg'),

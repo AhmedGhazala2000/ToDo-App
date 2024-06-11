@@ -18,7 +18,7 @@ class AddTaskView extends StatelessWidget {
       create: (context) => AddTaskCubit(getIt.get<AddTaskRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          appBar: buildCustomAppBar(context, title: 'Add new Task'),
+          appBar: buildAppBar(context, title: 'Add new Task'),
           body: const AddTaskViewBody(),
         ),
       ),

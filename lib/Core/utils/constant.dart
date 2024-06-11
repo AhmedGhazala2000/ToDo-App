@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Features/Home/presentation/views/widgets/qr_view.dart';
 import 'package:todo_app/Features/Profile/presentation/views/profile_view.dart';
 
 import '../../Features/Add/presentation/views/add_task_view.dart';
@@ -45,6 +46,7 @@ Map<String, WidgetBuilder> appRoutes() {
     TaskDetailsView.id: (context) => const TaskDetailsView(),
     AddTaskView.id: (context) => const AddTaskView(),
     EditTaskView.id: (context) => const EditTaskView(),
+    QrView.id: (context) => const QrView(),
   };
 }
 
