@@ -7,6 +7,7 @@ import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Features/Add/presentation/views/add_task_view.dart';
 import 'package:todo_app/Features/Home/data/repos/home_repo/home_repo_impl.dart';
 import 'package:todo_app/Features/Home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:todo_app/Features/Home/presentation/views/widgets/qr_view.dart';
 
 import 'widgets/home_view_body.dart';
 
@@ -46,13 +47,23 @@ class _HomeViewState extends State<HomeView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Scan Button
                 FloatingActionButton.small(
+                  heroTag: 'scan',
                   backgroundColor: kThirdColor,
                   shape: const CircleBorder(),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QrView(),
+                      ),
+                    );
+                  },
                   child: SvgPicture.asset('assets/images/barcode_icon.svg'),
                 ),
                 const SizedBox(height: 14),
+                // Add Button
                 FloatingActionButton(
                   heroTag: 'add',
                   backgroundColor: kPrimaryColor,
@@ -70,6 +81,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  // Refresh Function
   Future<void> _onRefresh(BuildContext context, String status) async {
     await Future.delayed(const Duration(seconds: 1)).then(
       (_) {
