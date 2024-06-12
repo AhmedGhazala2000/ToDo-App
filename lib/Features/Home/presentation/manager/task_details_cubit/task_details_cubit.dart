@@ -9,6 +9,7 @@ class TaskDetailsCubit extends Cubit<TaskDetailsState> {
   TaskDetailsCubit(this._taskDetailsRepo) : super(TaskDetailsInitialState());
 
   final TaskDetailsRepo _taskDetailsRepo;
+  bool isEdited = false;
 
   Future getTask({required String taskId}) async {
     emit(TaskDetailsLoadingState());

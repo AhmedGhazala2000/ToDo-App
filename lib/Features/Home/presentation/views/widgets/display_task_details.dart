@@ -5,6 +5,7 @@ import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
 
 import 'build_custom_list_tiles.dart';
+import 'custom_popup_menu_button.dart';
 import 'custom_task_details_app_bar.dart';
 
 class DisplayTaskDetails extends StatelessWidget {
@@ -19,7 +20,9 @@ class DisplayTaskDetails extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 22),
         child: Column(
           children: [
-            CustomTaskDetailsAppBar(task: task),
+            CustomTaskDetailsAppBar(
+              widget: CustomPopupMenuButton(task: task),
+            ),
             AspectRatio(
               aspectRatio: 1.5 / 1,
               child: Image.file(
