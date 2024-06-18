@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:todo_app/Core/widgets/add_image_widget.dart';
 import 'package:todo_app/Core/widgets/build_custom_widget.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_status_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_text_form_field.dart';
-import 'package:todo_app/Core/widgets/show_image_picker.dart';
 import 'package:todo_app/Features/Edit/data/models/edit_task_model.dart';
 import 'package:todo_app/Features/Edit/presentation/manager/edit_task_cubit/edit_task_cubit.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
@@ -32,16 +31,8 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
         child: Column(
           children: [
             const SizedBox(height: 24),
-            ShowImagePicker(
+            const AddImageWidget(
               text: 'Edit',
-              onCameraTap: () {
-                _getImage(ImageSource.camera);
-                Navigator.pop(context);
-              },
-              onGalleryTap: () {
-                _getImage(ImageSource.gallery);
-                Navigator.pop(context);
-              },
             ),
             BuildCustomWidget(
               text: 'Task title',
@@ -109,13 +100,5 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
         ),
       ),
     );
-  }
-
-  // get image from gallery or camera
-  Future<void> _getImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
-    if (pickedFile != null) {
-      image = pickedFile.path;
-    }
   }
 }

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
+import 'package:todo_app/Core/widgets/add_image_widget.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_text_form_field.dart';
 import 'package:todo_app/Features/Add/data/models/add_task_model.dart';
 import 'package:todo_app/Features/Add/presentation/views/widgets/show_date_piker.dart';
 
 import '../../../../../Core/widgets/build_custom_widget.dart';
-import '../../../../../Core/widgets/show_image_picker.dart';
 import '../../manager/add_task_cubit/add_task_cubit.dart';
 import 'add_task_button_bloc_consumer.dart';
 
@@ -38,16 +37,8 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
           child: Column(
             children: [
               const SizedBox(height: 24),
-              ShowImagePicker(
+              const AddImageWidget(
                 text: 'Add',
-                onCameraTap: () {
-                  _getImage(ImageSource.camera);
-                  Navigator.pop(context);
-                },
-                onGalleryTap: () {
-                  _getImage(ImageSource.gallery);
-                  Navigator.pop(context);
-                },
               ),
               BuildCustomWidget(
                 text: 'Task title',
@@ -136,12 +127,5 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
         ),
       ),
     );
-  }
-
-  Future<void> _getImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
-    if (pickedFile != null) {
-      image = pickedFile.path;
-    }
   }
 }

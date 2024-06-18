@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:todo_app/Core/repos/upload_image_repo/upload_image_repo_impl.dart';
 import 'package:todo_app/Features/Add/data/repos/add_task_repo_impl.dart';
 import 'package:todo_app/Features/Auth/data/repos/auth_repo_impl.dart';
 import 'package:todo_app/Features/Edit/data/repos/edit_task_repo_impl.dart';
@@ -38,4 +39,8 @@ void setupDependencyInjection() {
   //Task Details Instance
   getIt
       .registerSingleton<TaskDetailsRepoImpl>(TaskDetailsRepoImpl(apiServices));
+
+  //Upload Image Instance
+  getIt
+      .registerSingleton<UploadImageRepoImpl>(UploadImageRepoImpl(apiServices));
 }

@@ -4,18 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
-class ShowImagePicker extends StatelessWidget {
-  const ShowImagePicker(
-      {super.key, required this.text, this.onCameraTap, this.onGalleryTap});
+import '../function/show_custom_bottom_sheet.dart';
+
+class AddImageWidget extends StatelessWidget {
+  const AddImageWidget({super.key, required this.text});
 
   final String text;
-
-  final void Function()? onCameraTap, onGalleryTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _showCustomBottomSheet(context),
+      onTap: () => showCustomBottomSheet(context),
       child: DottedBorder(
         padding: const EdgeInsets.symmetric(vertical: 16),
         borderType: BorderType.RRect,
@@ -37,30 +36,6 @@ class ShowImagePicker extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  void _showCustomBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      useSafeArea: true,
-      context: context,
-      builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('Take a photo'),
-              onTap: onCameraTap,
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('Choose from gallery'),
-              onTap: onGalleryTap,
-            ),
-          ],
-        );
-      },
     );
   }
 }
