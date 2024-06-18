@@ -32,6 +32,7 @@ abstract class EndPoints {
   static const String refreshToken = 'auth/refresh-token';
   static const String profile = 'auth/profile';
   static const String todos = 'todos';
+  static const String uploadImg = 'upload/image';
 }
 
 // Routes
