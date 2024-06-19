@@ -54,6 +54,8 @@ dependencies:
   pull_to_refresh: ^2.0.0
   qr_flutter: ^4.1.0
   qr_code_scanner: ^1.0.1
+  mime:
+  http_parser:
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,10 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 import 'package:todo_app/Core/utils/api_services.dart';
 
 import '../../errors/failures.dart';
@@ -17,31 +18,32 @@ class UploadImageRepoImpl implements UploadImageRepo {
 
   @override
   Future<Either<Failures, String>> uploadImage({required File imgFile}) async {
-    String fileName = imgFile.path.split('/').last;
-    var formData = FormData.fromMap({
+    final String fileName = imgFile.path.split('/').last;
+    // Get the MIME type of the file
+    final String mimeType = lookupMimeType(imgFile.path) ?? 'image/jpeg';
+    final mimeTypeParts = mimeType.split('/');
+
+    final formData = FormData.fromMap({
       'image': await MultipartFile.fromFile(
         imgFile.path,
         filename: fileName,
-      )
+        contentType: MediaType(mimeTypeParts[0], mimeTypeParts[1]),
+      ),
     });
+
     try {
-      Response response = await _apiServices.request(
+      final Response response = await _apiServices.request(
         method: 'POST',
         endPoint: EndPoints.uploadImg,
         bodyData: formData,
         contentType: 'multipart/form-data',
       );
-      if (response.statusCode == 200) {
-        print(json.encode(response.data));
-      } else {
-        print(response.statusMessage);
-      }
       return right(response.data['image']);
     } on DioException catch (e) {
-      log(e.response?.data["message"].toString() ?? e.toString());
+      log("DioException: ${e.response?.data["message"] ?? e.toString()}");
       return left(ServerFailure.fromDioException(dioException: e));
     } catch (e) {
-      log(e.toString());
+      log("Exception: ${e.toString()}");
       return left(ServerFailure(errMessage: e.toString()));
     }
   }
