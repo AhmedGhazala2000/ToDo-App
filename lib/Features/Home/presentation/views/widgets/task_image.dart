@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TaskImage extends StatelessWidget {
-  const TaskImage({super.key, this.aspectRatio, required this.imageUrl});
+  const TaskImage(
+      {super.key, required this.imageUrl, this.aspectRatio, this.fit});
 
-  final double? aspectRatio;
   final String imageUrl;
+  final double? aspectRatio;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class TaskImage extends StatelessWidget {
       aspectRatio: aspectRatio ?? 1,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        fit: BoxFit.fill,
+        fit: fit,
         placeholder: (context, url) {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,

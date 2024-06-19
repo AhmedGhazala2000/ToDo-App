@@ -17,12 +17,14 @@ const Color kSecondColor = Color(0xff24252C);
 const Color kThirdColor = Color(0xffF0ECFF);
 const Color kFourthColor = Color(0xff7F7F7F);
 const Color kFifthColor = Color(0xffBABABA);
-//String
+// String
 const String kIsFirstTime = 'isFirstTime';
 const String kAccessToken = 'accessToken';
 const String kRefreshToken = 'refreshToken';
 const String kCurrentSelectedIndex = 'currentSelectedIndex';
 const String kStatus = 'status';
+const String kImage = 'image';
+const String kLinkImageRoot = 'https://todo.iraqsapp.com/images';
 
 // End Points
 abstract class EndPoints {

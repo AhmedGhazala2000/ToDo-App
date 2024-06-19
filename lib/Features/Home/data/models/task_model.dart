@@ -1,8 +1,8 @@
-import 'dart:io';
+
 
 class TaskModel {
   String? taskId;
-  File? image;
+  String? image;
   String? title;
   String? desc;
   String? priority;
@@ -26,7 +26,7 @@ class TaskModel {
 
   TaskModel.fromJson(Map<String, dynamic> json) {
     taskId = json['_id'];
-    image = File(json['image']);
+    image = json['image'];
     title = json['title'];
     desc = json['desc'];
     priority = json['priority'];
@@ -40,7 +40,7 @@ class TaskModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = taskId;
-    data['image'] = image?.path;
+    data['image'] = image;
     data['title'] = title;
     data['desc'] = desc;
     data['priority'] = priority;

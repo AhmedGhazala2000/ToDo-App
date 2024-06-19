@@ -15,10 +15,10 @@ void showCustomBottomSheet(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return BlocProvider(
-        create: (_) => UploadImageCubit(getIt.get<UploadImageRepoImpl>()),
+        create: (context) => UploadImageCubit(getIt.get<UploadImageRepoImpl>()),
         child: Builder(
           builder: (context) {
-            return BlocListener<UploadImageCubit, UploadImageState>(
+            return BlocConsumer<UploadImageCubit, UploadImageState>(
               listener: (context, state) {
                 if (state is UploadImageSuccessState) {
                   showSnackBar(
@@ -34,29 +34,38 @@ void showCustomBottomSheet(BuildContext context) {
                   );
                 }
               },
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.camera_alt),
-                    title: const Text('Take a photo'),
-                    onTap: () async {
-                      await _pickImage(ImageSource.camera, context);
-                      if (!context.mounted) return;
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text('Choose from gallery'),
-                    onTap: () async {
-                      await _pickImage(ImageSource.gallery, context);
-                      if (!context.mounted) return;
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
+              builder: (context, state) {
+                if (state is UploadImageLoadingState) {
+                  return const SizedBox(
+                    height: 100,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                } else {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.camera_alt),
+                        title: const Text('Take a photo'),
+                        onTap: () async {
+                          await _pickImage(ImageSource.camera, context);
+                          if (!context.mounted) return;
+                          Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.photo_library),
+                        title: const Text('Choose from gallery'),
+                        onTap: () async {
+                          await _pickImage(ImageSource.gallery, context);
+                          if (!context.mounted) return;
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                }
+              },
             );
           },
         ),

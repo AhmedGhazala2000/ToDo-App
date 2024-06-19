@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Core/widgets/add_image_widget.dart';
 import 'package:todo_app/Core/widgets/build_custom_widget.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
@@ -19,12 +21,20 @@ class EditTaskViewBody extends StatefulWidget {
 }
 
 class _EditTaskViewBodyState extends State<EditTaskViewBody> {
-  String? image, title, desc, priority, status;
+  String? title, desc, priority, status;
+
+  @override
+  void initState() {
+    //remove cached image
+    CachedNetwork.sharedPref.remove(kImage);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final TaskModel task =
         ModalRoute.of(context)?.settings.arguments as TaskModel;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -82,11 +92,12 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
             EditTaskButtonBlocConsumer(
               onPressed: () {
                 final EditTaskModel model = EditTaskModel(
+                  image:
+                      CachedNetwork.sharedPref.getString(kImage) ?? task.image!,
                   title: title ?? task.title!,
                   desc: desc ?? task.desc!,
                   priority: priority?.toLowerCase() ?? task.priority!,
                   status: status?.toLowerCase() ?? task.status!,
-                  image: image ?? task.image!.path,
                   userId: task.userId!,
                 );
                 BlocProvider.of<EditTaskCubit>(context).editTask(

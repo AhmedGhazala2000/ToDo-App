@@ -7,6 +7,7 @@ import 'package:todo_app/Features/Home/data/models/task_model.dart';
 import 'build_custom_list_tiles.dart';
 import 'custom_popup_menu_button.dart';
 import 'custom_task_details_app_bar.dart';
+import 'task_image.dart';
 
 class DisplayTaskDetails extends StatelessWidget {
   const DisplayTaskDetails({super.key, required this.task});
@@ -23,11 +24,9 @@ class DisplayTaskDetails extends StatelessWidget {
             CustomTaskDetailsAppBar(
               widget: CustomPopupMenuButton(task: task),
             ),
-            AspectRatio(
+            TaskImage(
               aspectRatio: 1.5 / 1,
-              child: Image.file(
-                task.image!,
-              ),
+              imageUrl: '$kLinkImageRoot/${task.image}',
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),

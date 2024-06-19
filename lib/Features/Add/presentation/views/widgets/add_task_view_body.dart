@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
+import 'package:todo_app/Core/utils/constant.dart';
+import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Core/widgets/add_image_widget.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
 import 'package:todo_app/Core/widgets/custom_text_form_field.dart';
@@ -22,9 +24,16 @@ class AddTaskViewBody extends StatefulWidget {
 class _AddTaskViewBodyState extends State<AddTaskViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AutovalidateMode? autoValidateMode = AutovalidateMode.disabled;
-  String? image, title, desc;
+  String? title, desc;
   String priority = 'Medium';
   DateTime? dueDate;
+
+  @override
+  void initState() {
+    //remove cached image
+    CachedNetwork.sharedPref.remove(kImage);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +110,7 @@ class _AddTaskViewBodyState extends State<AddTaskViewBody> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     AddTaskModel model = AddTaskModel(
-                      image: image ?? '',
+                      image: CachedNetwork.sharedPref.getString(kImage) ?? '',
                       title: title!,
                       desc: desc!,
                       priority: priority.toLowerCase(),

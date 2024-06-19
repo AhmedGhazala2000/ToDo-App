@@ -91,7 +91,7 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
   void _editModel(BuildContext context,
       {String? newPriority, String? newStatus}) {
     final EditTaskModel newModel = EditTaskModel(
-      image: widget.task.image!.path,
+      image: widget.task.image!,
       title: widget.task.title!,
       desc: widget.task.desc!,
       priority: newPriority ?? widget.task.priority!,
