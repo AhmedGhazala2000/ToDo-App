@@ -27,7 +27,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           return DisplayProfileData(user: state.userModel);
         } else if (state is ProfileFailureState) {
           return Center(
-            child: Text(state.errMessage, style: AppStyles.styleBold16),
+            child: Text(
+              state.errMessage,
+              style: AppStyles.styleBold16(context),
+            ),
           );
         } else {
           return const Center(

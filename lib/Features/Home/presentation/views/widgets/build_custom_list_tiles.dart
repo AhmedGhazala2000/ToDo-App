@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Core/widgets/custom_priority_list_tile.dart';
@@ -42,11 +43,11 @@ class _BuildCustomListTilesState extends State<BuildCustomListTiles> {
         return Column(
           children: [
             CustomListTile(
-              title: const Text(
+              title: Text(
                 'End Date',
                 style: TextStyle(
-                  fontSize: 9,
-                  color: Color(0xff6E6A7C),
+                  fontSize: getResponsiveFontSize(context, fontSize: 9),
+                  color: const Color(0xff6E6A7C),
                 ),
               ),
               subtitle: Text(

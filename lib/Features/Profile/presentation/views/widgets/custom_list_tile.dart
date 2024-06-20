@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -25,7 +26,7 @@ class CustomListTile extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 4),
           child: Text(
             title,
-            style: AppStyles.styleMedium12.copyWith(
+            style: AppStyles.styleMedium12(context).copyWith(
               color: const Color(0xff2F2F2F).withOpacity(.4),
             ),
           ),
@@ -33,7 +34,7 @@ class CustomListTile extends StatelessWidget {
         subtitle: Text(
           subtitle,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: getResponsiveFontSize(context, fontSize: 18),
             fontWeight: FontWeight.bold,
             color: const Color(0xff2F2F2F).withOpacity(.6),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Features/Edit/presentation/views/edit_task_view.dart';
@@ -42,8 +43,8 @@ class CustomPopupMenuButton extends StatelessWidget {
               },
               child: Text(
                 'Edit',
-                style: AppStyles.styleMedium12.copyWith(
-                  fontSize: 16,
+                style: AppStyles.styleMedium12(context).copyWith(
+                  fontSize: getResponsiveFontSize(context, fontSize: 16),
                   color: const Color(0xff00060D),
                 ),
               ),
@@ -57,8 +58,8 @@ class CustomPopupMenuButton extends StatelessWidget {
               },
               child: Text(
                 'Delete',
-                style: AppStyles.styleMedium12.copyWith(
-                  fontSize: 16,
+                style: AppStyles.styleMedium12(context).copyWith(
+                  fontSize: getResponsiveFontSize(context, fontSize: 16),
                   color: const Color(0xffFF7D53),
                 ),
               ),

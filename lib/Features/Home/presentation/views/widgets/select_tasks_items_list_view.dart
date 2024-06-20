@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/local_network.dart';
 
@@ -22,7 +21,7 @@ class SelectTasksItemsListView extends StatelessWidget {
     final currentSelectedIndex = localCached.getInt(kCurrentSelectedIndex);
 
     return SizedBox(
-      height: 40.h,
+      height: 40,
       child: ListView.builder(
         itemCount: listItems.length,
         scrollDirection: Axis.horizontal,

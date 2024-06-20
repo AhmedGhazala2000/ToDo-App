@@ -35,7 +35,7 @@ class DisplayTaskDetails extends StatelessWidget {
                 children: [
                   Text(
                     task.title!,
-                    style: AppStyles.styleBold24,
+                    style: AppStyles.styleBold24(context),
                   ),
                   const SizedBox(height: 8),
                   Text(

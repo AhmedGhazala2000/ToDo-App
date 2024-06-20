@@ -2,6 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
@@ -24,14 +25,14 @@ class _SelectCountryState extends State<SelectCountry> {
         children: [
           Text(
             context.read<AuthCubit>().selectedCountry!,
-            style: AppStyles.styleBold14.copyWith(color: kFourthColor),
+            style: AppStyles.styleBold14(context).copyWith(color: kFourthColor),
           ),
           IconButton(
             padding: EdgeInsets.zero,
-            icon: const Icon(
+            icon: Icon(
               FontAwesomeIcons.angleDown,
               color: kFourthColor,
-              size: 22,
+              size: getResponsiveFontSize(context, fontSize: 22),
             ),
             onPressed: () {
               showCountryPicker(

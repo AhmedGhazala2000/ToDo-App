@@ -66,7 +66,7 @@ class _QrViewState extends State<QrView> {
             child: Center(
               child: Text(
                 'Scan QR Code',
-                style: AppStyles.styleBold16.copyWith(
+                style: AppStyles.styleBold16(context).copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),

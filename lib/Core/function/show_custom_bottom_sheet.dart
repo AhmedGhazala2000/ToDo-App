@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../cubits/upload_image_cubit/upload_image_cubit.dart';
@@ -37,9 +36,9 @@ void showCustomBottomSheet(BuildContext context) {
               },
               builder: (context, state) {
                 if (state is UploadImageLoadingState) {
-                  return SizedBox(
-                    height: 100.h,
-                    child: const Center(child: CircularProgressIndicator()),
+                  return const SizedBox(
+                    height: 100,
+                    child: Center(child: CircularProgressIndicator()),
                   );
                 } else {
                   return Column(

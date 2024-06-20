@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 
 class SelectTasksItem extends StatelessWidget {
@@ -15,7 +15,7 @@ class SelectTasksItem extends StatelessWidget {
       margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       duration: const Duration(milliseconds: 500),
-      height: 40.h,
+      height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         color: isSelected ? kPrimaryColor : const Color(0xffF0ECFF),
@@ -25,7 +25,7 @@ class SelectTasksItem extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: getResponsiveFontSize(context, fontSize: 16),
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             color: isSelected ? Colors.white : const Color(0xff7C7C80),
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 
 class CustomButton extends StatelessWidget {
@@ -16,7 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      height: 50.h,
+      height: 50,
       minWidth: double.infinity,
       color: kPrimaryColor,
       textColor: Colors.white,

@@ -55,7 +55,10 @@ class _HomeViewBodyBlocConsumerState extends State<HomeViewBodyBlocConsumer> {
           );
         } else if (state is HomeFailureState) {
           return Center(
-            child: Text(state.errMessage, style: AppStyles.styleBold16),
+            child: Text(
+              state.errMessage,
+              style: AppStyles.styleBold16(context),
+            ),
           );
         } else {
           return const Center(

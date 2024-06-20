@@ -16,7 +16,7 @@ AppBar buildAppBar(BuildContext context,
     titleSpacing: 0,
     title: Text(
       title,
-      style: AppStyles.styleBold16,
+      style: AppStyles.styleBold16(context),
     ),
   );
 }

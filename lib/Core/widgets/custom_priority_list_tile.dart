@@ -29,7 +29,8 @@ class CustomPriorityListTile extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             '$priority Priority',
-            style: AppStyles.styleBold16.copyWith(color: priorityColor),
+            style:
+                AppStyles.styleBold16(context).copyWith(color: priorityColor),
           ),
         ],
       ),

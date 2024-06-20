@@ -46,7 +46,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Login', style: AppStyles.styleBold24),
+                Text(
+                  'Login',
+                  style: AppStyles.styleBold24(context),
+                ),
                 const SizedBox(
                   height: 24,
                 ),
@@ -119,7 +122,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               CustomInputButton(
                 child: Text(
                   'Sign Up here',
-                  style: AppStyles.styleBold14.copyWith(color: kPrimaryColor),
+                  style: AppStyles.styleBold14(context)
+                      .copyWith(color: kPrimaryColor),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, RegisterView.id);

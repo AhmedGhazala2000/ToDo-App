@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Core/utils/styles.dart';
@@ -24,7 +25,7 @@ class StartViewBody extends StatelessWidget {
         Text(
           'Task Management &\nTo-Do List',
           textAlign: TextAlign.center,
-          style: AppStyles.styleBold24.copyWith(
+          style: AppStyles.styleBold24(context).copyWith(
             color: const Color(0xff24252C),
           ),
         ),
@@ -43,8 +44,10 @@ class StartViewBody extends StatelessWidget {
               children: [
                 Text(
                   'Let’s Start',
-                  style: AppStyles.styleBold24
-                      .copyWith(fontSize: 19, color: Colors.white),
+                  style: AppStyles.styleBold24(context).copyWith(
+                    fontSize: getResponsiveFontSize(context, fontSize: 19),
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 SvgPicture.asset('assets/images/arrow-right.svg'),

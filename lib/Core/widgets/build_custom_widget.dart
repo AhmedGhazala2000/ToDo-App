@@ -16,7 +16,10 @@ class BuildCustomWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(text, style: AppStyles.styleRegular12),
+          Text(
+            text,
+            style: AppStyles.styleRegular12(context),
+          ),
           const SizedBox(height: 8),
           widget,
         ],

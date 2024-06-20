@@ -22,7 +22,10 @@ class CustomHomeAppBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
           children: [
-            const Text("Logo", style: AppStyles.styleBold24),
+            Text(
+              "Logo",
+              style: AppStyles.styleBold24(context),
+            ),
             const Spacer(),
             IconButton(
               onPressed: () {

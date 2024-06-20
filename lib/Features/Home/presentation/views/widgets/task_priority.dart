@@ -23,7 +23,7 @@ class TaskPriority extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           priority,
-          style: AppStyles.styleMedium12.copyWith(
+          style: AppStyles.styleMedium12(context).copyWith(
             color: getPriorityColor(priority),
           ),
         )

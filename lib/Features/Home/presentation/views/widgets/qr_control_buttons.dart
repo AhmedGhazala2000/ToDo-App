@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 
@@ -21,18 +22,21 @@ class QrControlButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildControlButton(
+          context,
           icon: isFlashOn ? Icons.flash_off : Icons.flash_on,
           isIconColor: isFlashOn,
           label: 'Flash',
           onPressed: onFlashPressed,
         ),
         _buildControlButton(
+          context,
           icon: Icons.flip_camera_android,
           isIconColor: isCameraFront,
           label: 'Flip',
           onPressed: onFlipPressed,
         ),
         _buildControlButton(
+          context,
           icon: isCameraPaused ? Icons.play_arrow : Icons.pause,
           isIconColor: !isCameraPaused,
           label: isCameraPaused ? 'Resume' : 'Pause',
@@ -42,7 +46,7 @@ class QrControlButtons extends StatelessWidget {
     );
   }
 
-  Widget _buildControlButton(
+  Widget _buildControlButton(BuildContext context,
       {required IconData icon,
       bool isIconColor = false,
       required String label,
@@ -52,12 +56,15 @@ class QrControlButtons extends StatelessWidget {
         IconButton(
           icon: Icon(
             icon,
-            size: 30,
+            size: getResponsiveFontSize(context, fontSize: 30),
             color: isIconColor ? kPrimaryColor : null,
           ),
           onPressed: onPressed,
         ),
-        Text(label, style: AppStyles.styleRegular12),
+        Text(
+          label,
+          style: AppStyles.styleRegular12(context),
+        ),
       ],
     );
   }

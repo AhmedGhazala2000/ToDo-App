@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/styles.dart';
@@ -46,7 +47,10 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Register', style: AppStyles.styleBold24),
+                Text(
+                  'Register',
+                  style: AppStyles.styleBold24(context),
+                ),
                 const SizedBox(
                   height: 24,
                 ),
@@ -97,10 +101,10 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                       },
                       value: experienceLevel,
                       items: const ['Fresh', 'Junior', 'MidLevel', 'Senior'],
-                      icon: const Icon(
+                      icon: Icon(
                         FontAwesomeIcons.angleDown,
                         color: kFourthColor,
-                        size: 22,
+                        size: getResponsiveFontSize(context, fontSize: 22),
                       ),
                     ),
                   ),
@@ -129,6 +133,7 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
                       isVisibility
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
+                      size: getResponsiveFontSize(context, fontSize: 24),
                     ),
                     onPressed: () {
                       setState(() {
@@ -180,7 +185,8 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
               CustomInputButton(
                 child: Text(
                   'Sign in',
-                  style: AppStyles.styleBold14.copyWith(color: kPrimaryColor),
+                  style: AppStyles.styleBold14(context)
+                      .copyWith(color: kPrimaryColor),
                 ),
                 onPressed: () {
                   Navigator.pop(context);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
@@ -43,7 +44,9 @@ class EditTaskButtonBlocConsumer extends StatelessWidget {
               ? const CustomCircularIndicator()
               : Text(
                   'Save',
-                  style: AppStyles.styleBold14.copyWith(fontSize: 19),
+                  style: AppStyles.styleBold14(context).copyWith(
+                    fontSize: getResponsiveFontSize(context, fontSize: 19),
+                  ),
                 ),
         );
       },

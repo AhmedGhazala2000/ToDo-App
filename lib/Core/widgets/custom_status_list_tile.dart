@@ -18,7 +18,7 @@ class CustomStatusListTile extends StatelessWidget {
     return CustomListTile(
       title: Text(
         status,
-        style: AppStyles.styleBold16.copyWith(
+        style: AppStyles.styleBold16(context).copyWith(
           color: getStatusTextColor(status),
         ),
       ),

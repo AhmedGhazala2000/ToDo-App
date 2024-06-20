@@ -38,9 +38,9 @@ class CustomTaskDetailsAppBar extends StatelessWidget {
                 },
               ),
               const SizedBox(width: 4),
-              const Text(
+              Text(
                 'Task Details',
-                style: AppStyles.styleBold16,
+                style: AppStyles.styleBold16(context),
               ),
             ],
           ),

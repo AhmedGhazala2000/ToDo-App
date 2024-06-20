@@ -36,7 +36,8 @@ class LoginButtonBlocConsumer extends StatelessWidget {
               ? const CustomCircularIndicator()
               : Text(
                   'Sign In',
-                  style: AppStyles.styleBold16.copyWith(color: Colors.white),
+                  style: AppStyles.styleBold16(context)
+                      .copyWith(color: Colors.white),
                 ),
         );
       },

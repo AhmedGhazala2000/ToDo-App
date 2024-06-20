@@ -31,7 +31,10 @@ class _TaskDetailsViewBodyState extends State<TaskDetailsViewBody> {
         } else if (state is TaskDetailsFailureState) {
           return buildColumn(
             context,
-            Text(state.errMessage, style: AppStyles.styleBold16),
+            Text(
+              state.errMessage,
+              style: AppStyles.styleBold16(context),
+            ),
           );
         } else {
           return buildColumn(

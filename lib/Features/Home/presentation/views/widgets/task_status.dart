@@ -16,7 +16,7 @@ class TaskStatus extends StatelessWidget {
           color: getStatusColor(status)),
       child: Text(
         status,
-        style: AppStyles.styleMedium12.copyWith(
+        style: AppStyles.styleMedium12(context).copyWith(
           color: getStatusTextColor(status),
         ),
       ),

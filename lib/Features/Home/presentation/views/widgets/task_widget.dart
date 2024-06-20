@@ -37,7 +37,7 @@ class TaskWidget extends StatelessWidget {
                       child: Text(
                         task.title!,
                         overflow: TextOverflow.ellipsis,
-                        style: AppStyles.styleBold16,
+                        style: AppStyles.styleBold16(context),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -60,7 +60,7 @@ class TaskWidget extends StatelessWidget {
                     TaskPriority(priority: task.priority!),
                     Text(
                       DateFormat('d/M/yyyy').format(task.createdAt!),
-                      style: AppStyles.styleMedium12.copyWith(
+                      style: AppStyles.styleMedium12(context).copyWith(
                         fontWeight: FontWeight.normal,
                         color: kSecondColor.withOpacity(.6),
                       ),

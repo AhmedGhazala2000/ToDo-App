@@ -20,10 +20,13 @@ class MyTasksSection extends StatelessWidget {
         const SliverToBoxAdapter(
           child: SizedBox(height: 24),
         ),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Opacity(
             opacity: 0.6,
-            child: Text('My Tasks', style: AppStyles.styleBold16),
+            child: Text(
+              'My Tasks',
+              style: AppStyles.styleBold16(context),
+            ),
           ),
         ),
         const SliverToBoxAdapter(
@@ -35,13 +38,13 @@ class MyTasksSection extends StatelessWidget {
         if (todos.isNotEmpty)
           TaskWidgetListView(todos: todos)
         else
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(top: 50),
               child: Center(
                 child: Text(
                   'No tasks yet',
-                  style: AppStyles.styleBold16,
+                  style: AppStyles.styleBold16(context),
                 ),
               ),
             ),
