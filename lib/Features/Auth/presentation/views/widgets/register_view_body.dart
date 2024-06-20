@@ -35,11 +35,12 @@ class _LoginViewBodyState extends State<RegisterViewBody> {
       child: ListView(
         children: [
           SizedBox(
-              height: height * .25,
-              child: Image.asset(
-                'assets/images/art_image.png',
-                fit: BoxFit.scaleDown,
-              )),
+            height: height * .25,
+            child: Image.asset(
+              'assets/images/art_image.png',
+              fit: BoxFit.scaleDown,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(

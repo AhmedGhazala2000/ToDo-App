@@ -11,9 +11,15 @@ class StartViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+
     return Column(
       children: [
-        Expanded(child: Image.asset('assets/images/art_image.png')),
+        Expanded(
+          child: Image.asset(
+            'assets/images/art_image.png',
+          ),
+        ),
         const SizedBox(height: 24),
         Text(
           'Task Management &\nTo-Do List',
@@ -50,7 +56,7 @@ class StartViewBody extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 70),
+        SizedBox(height: orientation == Orientation.portrait ? 70 : 30),
       ],
     );
   }

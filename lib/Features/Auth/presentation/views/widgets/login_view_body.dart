@@ -28,12 +28,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return Form(
       key: _formKey,
       autovalidateMode: autoValidateMode,
-      child: Column(
+      child: ListView(
         children: [
-          Expanded(child: Image.asset('assets/images/art_image.png')),
+          SizedBox(
+            height: height * .45,
+            child: Image.asset(
+              'assets/images/art_image.png',
+              fit: BoxFit.scaleDown,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
