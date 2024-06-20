@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
@@ -39,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       opacity: _animation!,
       child: Center(
         child: SvgPicture.asset(
-          'assets/images/splash_icon.svg',
+          Assets.splash,
           width: 124,
         ),
       ),

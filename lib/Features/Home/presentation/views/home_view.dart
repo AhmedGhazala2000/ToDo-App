@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/dependency_injection.dart';
 import 'package:todo_app/Features/Add/presentation/views/add_task_view.dart';
@@ -58,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
                       QrView.id,
                     );
                   },
-                  child: SvgPicture.asset('assets/images/barcode_icon.svg'),
+                  child: SvgPicture.asset(Assets.barcode),
                 ),
                 const SizedBox(height: 14),
                 // Add Button

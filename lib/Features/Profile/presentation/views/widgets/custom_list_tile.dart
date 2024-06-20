@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Core/function/get_responsive_font_size.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile(

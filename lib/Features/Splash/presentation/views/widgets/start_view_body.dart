@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/Core/function/get_responsive_font_size.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/local_network.dart';
-import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
@@ -18,7 +19,7 @@ class StartViewBody extends StatelessWidget {
       children: [
         Expanded(
           child: Image.asset(
-            'assets/images/art_image.png',
+            'assets/images/art.png',
           ),
         ),
         const SizedBox(height: 24),
@@ -50,7 +51,7 @@ class StartViewBody extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                SvgPicture.asset('assets/images/arrow-right.svg'),
+                SvgPicture.asset(Assets.arrowRight),
               ],
             ),
             onPressed: () async {

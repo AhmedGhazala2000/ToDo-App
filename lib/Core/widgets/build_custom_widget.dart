@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 
 class BuildCustomWidget extends StatelessWidget {
   const BuildCustomWidget(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
 
 class TaskPriority extends StatelessWidget {
   const TaskPriority({super.key, required this.priority});
@@ -13,7 +14,7 @@ class TaskPriority extends StatelessWidget {
     return Row(
       children: [
         SvgPicture.asset(
-          'assets/images/flag.svg',
+          Assets.flag,
           colorFilter: ColorFilter.mode(
             getPriorityColor(priority),
             BlendMode.srcIn,

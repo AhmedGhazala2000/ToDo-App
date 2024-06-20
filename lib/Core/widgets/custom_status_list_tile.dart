@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Home/presentation/views/widgets/custom_list_tile.dart';
 
@@ -26,7 +27,7 @@ class CustomStatusListTile extends StatelessWidget {
         onChanged: onChanged,
         items: const ['Waiting', 'Inprogress', 'Finished'],
         icon: SvgPicture.asset(
-          'assets/images/arrow-down.svg',
+          Assets.arrowDown,
           colorFilter: ColorFilter.mode(
             getStatusTextColor(status),
             BlendMode.srcIn,

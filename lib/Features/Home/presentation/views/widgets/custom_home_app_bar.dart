@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
 import 'package:todo_app/Core/utils/constant.dart';
 import 'package:todo_app/Core/utils/dependency_injection.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Features/Auth/data/repos/auth_repo_impl.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 import 'package:todo_app/Features/Profile/presentation/views/profile_view.dart';

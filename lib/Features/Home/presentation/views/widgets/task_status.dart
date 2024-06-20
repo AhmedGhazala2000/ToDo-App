@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 
 class TaskStatus extends StatelessWidget {
   const TaskStatus({super.key, required this.status});

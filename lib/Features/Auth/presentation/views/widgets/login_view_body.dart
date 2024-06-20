@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/data/models/login_request_model.dart';
 import 'package:todo_app/Features/Auth/presentation/views/register_view.dart';
@@ -37,7 +38,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           SizedBox(
             height: height * .45,
             child: Image.asset(
-              'assets/images/art_image.png',
+              Assets.art,
               fit: BoxFit.scaleDown,
             ),
           ),

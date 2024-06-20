@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/Core/function/get_responsive_font_size.dart';
 import 'package:todo_app/Core/function/show_snack_bar.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Core/widgets/custom_circular_indicator.dart';
 import 'package:todo_app/Features/Home/presentation/views/home_view.dart';

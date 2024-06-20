@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Home/presentation/views/widgets/custom_list_tile.dart';
 
@@ -20,7 +21,7 @@ class CustomPriorityListTile extends StatelessWidget {
       title: Row(
         children: [
           SvgPicture.asset(
-            'assets/images/flag.svg',
+            Assets.flag,
             colorFilter: ColorFilter.mode(
               priorityColor,
               BlendMode.srcIn,
@@ -38,7 +39,7 @@ class CustomPriorityListTile extends StatelessWidget {
         onChanged: onChanged,
         items: const ['Low', 'Medium', 'High'],
         icon: SvgPicture.asset(
-          'assets/images/arrow-down.svg',
+          Assets.arrowDown,
           colorFilter: ColorFilter.mode(
             priorityColor,
             BlendMode.srcIn,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Features/Home/data/models/task_model.dart';
 
 import 'build_custom_list_tiles.dart';

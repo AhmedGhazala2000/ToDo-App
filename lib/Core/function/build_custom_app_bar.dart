@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_app/Core/utils/styles.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 
 AppBar buildAppBar(BuildContext context,
     {required String title, Widget? actions}) {
@@ -8,7 +9,7 @@ AppBar buildAppBar(BuildContext context,
     backgroundColor: Colors.transparent,
     elevation: 0,
     leading: IconButton(
-      icon: SvgPicture.asset('assets/images/arrow_left.svg'),
+      icon: SvgPicture.asset(Assets.arrowLeft),
       onPressed: () {
         Navigator.pop(context);
       },

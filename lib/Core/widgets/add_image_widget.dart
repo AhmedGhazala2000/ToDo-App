@@ -2,8 +2,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/Core/function/get_responsive_font_size.dart';
+import 'package:todo_app/Core/utils/app_images.dart';
+import 'package:todo_app/Core/utils/app_styles.dart';
 import 'package:todo_app/Core/utils/constant.dart';
-import 'package:todo_app/Core/utils/styles.dart';
 
 import '../function/show_custom_bottom_sheet.dart';
 
@@ -25,7 +26,7 @@ class AddImageWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset('assets/images/addImg_icon.svg'),
+            SvgPicture.asset(Assets.addImg),
             const SizedBox(width: 8),
             Text(
               '$text Img',
