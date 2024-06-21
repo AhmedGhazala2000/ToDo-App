@@ -8,8 +8,8 @@ import '../../Features/Auth/presentation/views/register_view.dart';
 import '../../Features/Edit/presentation/views/edit_task_view.dart';
 import '../../Features/Home/presentation/views/home_view.dart';
 import '../../Features/Home/presentation/views/task_details_view.dart';
+import '../../Features/Onboarding/presentation/view/onboarding_view.dart';
 import '../../Features/Splash/presentation/views/splash_view.dart';
-import '../../Features/Splash/presentation/views/start_view.dart';
 
 // Colors
 const Color kPrimaryColor = Color(0xff5F33E1);
@@ -41,7 +41,7 @@ abstract class EndPoints {
 Map<String, WidgetBuilder> appRoutes() {
   return {
     SplashView.id: (context) => const SplashView(),
-    StartView.id: (context) => const StartView(),
+    OnboardingView.id: (context) => const OnboardingView(),
     LoginView.id: (context) => const LoginView(),
     RegisterView.id: (context) => const RegisterView(),
     HomeView.id: (context) => const HomeView(),

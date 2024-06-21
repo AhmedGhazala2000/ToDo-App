@@ -6,7 +6,7 @@ import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
 import '../../../../Home/presentation/views/home_view.dart';
-import '../start_view.dart';
+import '../../../../Onboarding/presentation/view/onboarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -78,7 +78,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       return HomeView.id;
     } else {
       if (isFirstTime) {
-        return StartView.id;
+        return OnboardingView.id;
       }
       return LoginView.id;
     }

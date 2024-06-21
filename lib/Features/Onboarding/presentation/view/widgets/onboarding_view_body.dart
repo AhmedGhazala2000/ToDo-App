@@ -8,8 +8,8 @@ import 'package:todo_app/Core/utils/local_network.dart';
 import 'package:todo_app/Core/widgets/custom_buttons.dart';
 import 'package:todo_app/Features/Auth/presentation/views/login_view.dart';
 
-class StartViewBody extends StatelessWidget {
-  const StartViewBody({super.key});
+class OnboardingViewBody extends StatelessWidget {
+  const OnboardingViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class StartViewBody extends StatelessWidget {
       children: [
         Expanded(
           child: Image.asset(
-            'assets/images/art.png',
+            Assets.art,
           ),
         ),
         const SizedBox(height: 24),
