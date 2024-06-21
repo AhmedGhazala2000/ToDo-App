@@ -8,15 +8,15 @@ class SimpleBlocObservers extends BlocObserver {
     debugPrint('onChange: $change');
   }
 
-  // @override
-  // void onClose(BlocBase bloc) {
-  //   super.onClose(bloc);
-  //   debugPrint('onClose: $bloc');
-  // }
-  //
-  // @override
-  // void onCreate(BlocBase bloc) {
-  //   super.onCreate(bloc);
-  //   debugPrint('onCreate: $bloc');
-  // }
+// @override
+// void onClose(BlocBase bloc) {
+//   super.onClose(bloc);
+//   debugPrint('onClose: $bloc');
+// }
+//
+// @override
+// void onCreate(BlocBase bloc) {
+//   super.onCreate(bloc);
+//   debugPrint('onCreate: $bloc');
+// }
 }

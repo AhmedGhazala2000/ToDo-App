@@ -1,5 +1,3 @@
-
-
 class TaskModel {
   String? taskId;
   String? image;
